@@ -1,0 +1,88 @@
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+      <ion-item>
+    <div id="date">
+        <p class="todayDate">{{myDate | date:'EEEE , dd MMMM'}}</p>
+    </div>
+      </ion-item>
+  </ion-header>
+    <div id="overall" [hidden]="pauseIn">
+    <p id="chrono">{{timeWorking.hours | add0}}:{{timeWorking.minutes | add0}}<span id="milliseconds">:{{timeWorking.seconds | add0}}</span></p>
+    <div id="bottomDiv">
+        <div id="workBreak">
+            <div id="work">
+                <img src="../../assets/WorkWithCircle.svg">
+                <p class="text">WORK</p>
+                <p class="time">{{timeWorking.hours |add0}}:{{timeWorking.minutes | add0}}:{{timeWorking.seconds | add0}}</p>
+            </div>
+            <div id="break">
+                <img src="../../assets/BreakWithCircle.svg">
+                <p class="text">BREAK</p>
+                <p class="time">{{timeBreaking.hours | add0}}:{{timeBreaking.minutes | add0}}:{{timeBreaking.seconds | add0}}</p>
+            </div>
+        </div>
+        <div [hidden]="clockedIn" (click)="clockIn()" id="clockIn">
+            <img src="../../assets/ClockIn.svg">
+            <p id="clockText">CLOCK IN</p>
+        </div>
+        <div (click)="clockIn()" [hidden]="!clockedIn" id="clockInfo">
+            <div id="inOut">
+                <div id="columnOne">
+                    <p class="capsulate">CLOCKED IN</p>
+                    <p class="capsulate">CLOCK OUT</p>
+                </div>
+                <div id="columnTwo">
+                    <p class="inOutTime">{{timeWorking.hours | add0}}:{{timeWorking.minutes | add0}}:{{timeWorking.seconds | add0}}</p>
+                    <p class="inOutTime">{{timeBreaking.hours | add0}}:{{timeBreaking.minutes | add0}}:{{timeBreaking.seconds | add0}}</p>
+                </div>
+            </div>
+            <div id="totalHours">
+                <p class="title">TOTAL HOURS</p>
+                <div class="todayDiv">
+                    <p class="today">Today</p>
+                    <p id="todayHours">{{timeWorking.hours | add0}}:{{timeWorking.minutes | add0}}:{{timeWorking.seconds | add0}}</p>
+                </div>
+                <div class="weekDiv">
+                    <p class="week">This Week</p>
+                    <p id="weekHours">{{weekHours.hours}}:{{weekHours.minutes}}:00</p>
+                </div>
+                <div class="monthDiv">
+                    <p class="month">This Month</p>
+                    <p id="monthHours">{{monthHours.hours}}:{{monthHours.minutes}}:00</p>
+                </div>
+            </div>
+            <div id="balanceWork">
+                <p class="title">BALANCE TO WORK</p>
+                <div class="todayDiv">
+                    <p class="today">Today</p>
+                    <p id="todayHoursYellow">{{timeTodayLeft.hours | add0}}:{{timeTodayLeft.minutes | add0}}:{{timeTodayLeft.seconds | add0}}</p>
+                </div>
+                <div class="weekDiv">
+                    <p class="week">This Week</p>
+                    <p id="weekHoursYellow">{{weekHoursLeft.hours}}:{{weekHoursLeft.minutes}}:00</p>
+                </div>
+                <div class="monthDiv">
+                    <p class="month">This Month</p>
+                    <p id="monthHoursYellow">{{monthHoursLeft.hours}}:{{monthHoursLeft.minutes}}:00</p>
+                </div>
+            </div>
+        </div>
+        <div [hidden]="!clockedIn" id="clockBreak">
+            <div (click)="clockOut()" id="clockImage">
+                <p class="clockOut">CLOCK OUT</p>
+            </div>
+            <div (click)="takeBreak()" id="breakImage">
+                <p class="takeBreak">TAKE BREAK</p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div [hidden]="!pauseIn" >
+        <img id="coffeeBreakBig" src="../../assets/coffee-break-big.svg">
+        <p id="chrono2">{{timeBreaking.hours | add0}}:{{timeBreaking.minutes | add0}}<span id="milliseconds2">:{{timeBreaking.seconds | add0}}</span></p>
+        <div (click)="stopBreak()" id="notebookImage">
+            <p id="resume">RESUME WORK</p>
+        </div>
+    </div>
+</ion-content>

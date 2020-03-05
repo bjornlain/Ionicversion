@@ -1,0 +1,60 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-item>
+      <div id="topNav">
+        <p id="timesheet">TIMESHEETS</p>
+        <ion-icon id="plusIcon" name="add-circle"></ion-icon>
+      </div>
+    </ion-item>
+  </ion-header>
+  <div class="boxYear">
+    <p class="textYear">YEAR {{yearToday}}</p>
+  </div>
+  <div  class="boxMonth">
+    <select [ngModel]="selectedDevice" (ngModelChange)="onChange($event)" class="textMonth">
+      <option *ngFor="let month of monthNames" value="{{month}}">{{month}}</option>
+    </select>
+  </div>
+  <div id="totalHours">
+    <div class="todayDiv total">
+      <p class="title">TOTAL HOURS</p>
+      <p id="hoursOverall">{{monthHours.hours | add03}}:{{monthHours.minutes | add03}}:{{monthHours.seconds | add03}}</p>
+    </div>
+    <div class="todayDiv">
+      <p class="uText">Days worked</p>
+      <p class="uHours">{{daysWorked}}</p>
+    </div>
+    <div class="weekDiv">
+      <p class="uText">Official holidays</p>
+      <p class="uHours">1</p>
+    </div>
+    <div class="monthDiv">
+      <p class="uText">Average hours/day</p>
+     <p class="uHours">{{averageHoursDay.hours | add05}}:{{averageHoursDay.minutes | add05}}:00</p>
+    </div>
+  </div>
+  <div id="weeks">
+    <p class="titleWeeks">WEEKS</p>
+    <div *ngFor="let week of weekHoursMonth" (click)="goToWeek()" class="box">
+      <div class="columnFlex">
+        <p class="textBox">Week {{week.weekNumber}}</p>
+        <p class="hours">Hours {{week.hours.hours | add05}}:{{week.hours.minutes | add05}}:00</p>
+      </div>
+      <img src="../../assets/monitor.svg">
+    </div>
+  </div>
+  <div id="overtime">
+    <div class="todayDiv margin">
+      <p class="text">OVERTIME TOTAL 2020</p>
+      <p class="textNumber">+ 04:00:00</p>
+    </div>
+    <div class="todayDiv margin">
+      <p class="text">OVERTIME RETURNED</p>
+      <p class="textNumber">- 04:00:00</p>
+    </div>
+    <div class="todayDiv margin">
+      <p class="textBold">OVERTIME REMAINING TOTAL</p>
+      <p class="textNumberBold">+ 00:00:00</p>
+    </div>
+  </div>
+</ion-content>

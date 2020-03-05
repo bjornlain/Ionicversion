@@ -1,0 +1,29 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-item>
+      <div id="topNav">
+        <p id="settings">SETTINGS</p>
+      </div>
+    </ion-item>
+  </ion-header>
+  <div id="outerDiv">
+    <div class="box">
+      <p class="textBox">Information</p>
+    </div>
+    <div class="box">
+      <p class="textBox">Notifications</p>
+    </div>
+    <div class="box">
+      <p class="textBox">Export</p>
+    </div>
+    <div class="boxLogOut">
+      <p (click)="logOut()" class="textLogOut">Logout</p>
+    </div>
+  </div>
+  <div class="box">
+    <p class="textBoxRed">Privacy Policy</p>
+  </div>
+  <div class="box">
+    <p class="textBoxRed">Terms of use</p>
+  </div>
+</ion-content>

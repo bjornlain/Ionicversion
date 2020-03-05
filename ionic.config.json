@@ -1,0 +1,7 @@
+{
+  "name": "maximusmobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

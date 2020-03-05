@@ -1,0 +1,77 @@
+#topNav{
+  display: flex;
+  flex-direction: row;
+  width:100%;
+  justify-content: space-between;
+  align-items: center;
+  margin:0 1px 0 1px;
+}
+#schedule{
+  font-size: 18px;
+  font-weight: bold;
+}
+#plusIcon{
+  height:35px;
+  width:35px;
+}
+.day{
+  font-size: 14px;
+  font-weight: 400;
+}
+#regularSchedule{
+  background-color: #333A44;
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+  font-weight: 400;
+  justify-content: space-between;
+  align-items: center;
+  padding:0 15px 0 15px;
+}
+#regularText{
+  color:white;
+  margin-left: 10px;
+}
+#left{
+  display: flex;
+  flex-direction: row;
+  margin-left:10px;
+}
+#weeklySchedule{
+  font-size: 14px;
+  font-weight: 500;
+  width:100%;
+  margin-left: 25px;
+
+}
+.timeBreak{
+  margin-left: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.timeGuardian{
+  margin-right: 25px;
+  margin-left: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.weekDiv{
+  background-color: #F6F6F6;
+}
+.dayDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height:29px;
+  padding:0 20px 0 20px;
+  margin-bottom: 3px;
+}
+.guardian{
+  display: flex;
+  flex-direction: row;
+}
+.coffeeBreak{
+  display: flex;
+  flex-direction: row;
+}

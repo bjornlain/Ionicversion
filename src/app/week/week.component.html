@@ -1,0 +1,20 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-item>
+      <div id="topNav">
+        <p (click)="goBack()" id="month">December</p>
+        <ion-icon id="plusIcon" name="add-circle"></ion-icon>
+      </div>
+    </ion-item>
+  </ion-header>
+  <div class="boxWeek">
+    <p class="textWeek">WEEK 51</p>
+  </div>
+  <div (click)="goToDay()" class="box" *ngFor="let date of dateArray" >
+    <div class="columnFlex"  >
+      <p class="textBox">{{date.date}}</p>
+      <p class="hours">Hours  {{date.hours}}</p>
+    </div>
+    <img class="image" src="../../assets/guardian.svg">
+  </div>
+</ion-content>

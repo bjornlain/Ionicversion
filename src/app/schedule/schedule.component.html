@@ -1,0 +1,29 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-item>
+      <div id="topNav">
+        <p id="schedule">SCHEDULE</p>
+        <ion-icon id="plusIcon" name="add-circle"></ion-icon>
+      </div>
+    </ion-item>
+  </ion-header>
+  <div id="regularSchedule">
+    <div id="left">
+      <img src="../../assets/Schedule_White.svg">
+      <p id="regularText">REGULAR SCHEDULE</p>
+    </div>
+    <ion-toggle id="toggle" color="medium"></ion-toggle>
+  </div>
+ <p id="weeklySchedule">WEEKLY SCHEDULE</p>
+  <div (click)="newSchedule(day.day)" class="weekDiv" *ngFor="let day of scheduleArray" >
+    <div class="dayDiv">
+      <p class="day">{{day.day}}</p>
+      <div class="guardian">
+        <img src="../../assets/guardian.svg">
+        <p class="timeGuardian">{{day.codingHours.hours | add02}}:{{day.codingHours.minutes | add02}}:{{day.codingHours.seconds | add02}}</p>
+        <img src="../../assets/coffee-break.svg">
+        <p class="timeBreak">{{day.socialHours.hours | add02}}:{{day.socialHours.minutes | add02}}:{{day.socialHours.seconds | add02}}</p>
+      </div>
+    </div>
+  </div>
+</ion-content>

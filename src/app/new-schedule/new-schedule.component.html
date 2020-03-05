@@ -1,0 +1,43 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-item>
+      <div id="topNav">
+        <p (click)="goBackSchedule()" id="cancel">Cancel</p>
+        <p id="day">{{day}}</p>
+      </div>
+    </ion-item>
+  </ion-header>
+  <div class="weekDiv" >
+    <div class="dayDiv">
+      <p class="dayText">Coding Hours</p>
+      <div class="guardian">
+        <img src="../../assets/guardian.svg">
+        <p class="timeGuardian">08:00:00</p>
+      </div>
+    </div>
+    <div class="dayDiv">
+      <p class="dayText">Social Breaks</p>
+      <div class="guardian">
+        <img src="../../assets/coffee-break.svg">
+        <p class="timeGuardian">01:00:00</p>
+      </div>
+    </div>
+  </div>
+  <div id="done">
+    <p (click)="saveSchedule()" id="doneText">Done</p>
+  </div>
+  <div id="hourSet">
+    <ion-item>
+      <ion-label>Set Coding Hours</ion-label>
+      <ion-datetime  (ionChange)="updateCodingHours(codingHours.value)" #codingHours display-format="h:mm " picker-format="h:mm " value="1990-02-19T07:00Z"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Set Social Breaks</ion-label>
+      <ion-datetime (ionChange)="updateSocialHours(breakHours.value)" #breakHours display-format="h:mm " picker-format="h:mm " value="1990-02-19T00:00Z"></ion-datetime>
+    </ion-item>
+  </div>
+  <div (click)="saveSchedule()" id="schedule">
+    <p id="scheduleText">SAVE NEW SCHEDULE</p>
+    <img src="../../assets/save.svg">
+  </div>
+</ion-content>

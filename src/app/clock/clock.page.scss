@@ -1,0 +1,239 @@
+
+ion-content ion-toolbar {
+  --background: translucent;
+}
+
+.todayDate{
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+}
+#chrono{
+  font-size: 70px;
+  text-align: center;
+  margin-bottom: 25px;
+  margin-top: 20px;
+}
+#milliseconds{
+  font-size: 22px;
+}
+#clockIn{
+  height:359px;
+  width:content-box;
+  background-color: #58BA9D;
+  display :flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#clockText{
+  margin-left: 10px;
+  font-size: 21px;
+  font-weight: 500;
+  color:white;
+}
+#workBreak{
+  display:flex;
+  flex-direction:row;
+}
+#work{
+  display: flex;
+  flex-direction: column;
+  width:50%;
+  align-items: center;
+}
+#break{
+  display: flex;
+  flex-direction: column;
+  width:50%;
+  align-items: center;
+}
+.text{
+  font-weight: 600;
+  font-size: 12px;
+}
+.time{
+  margin-top: -10px;
+  font-size: 18px;
+  font-weight: 400;
+}
+#clockInfo{
+  background-color:white;
+  width:100%;
+}
+#inOut{
+  display: flex;
+  flex-direction: column;
+}
+#columnOne{
+  display: flex;
+  flex-direction: row;
+  background-color: #333A44;
+  width:100%;
+  justify-content: space-between;
+  height:25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  align-items:center;
+}
+#columnTwo{
+  display: flex;
+  flex-direction:row;
+  background-color: #333A44;
+  justify-content: space-between;
+  width:100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  align-items:center;
+  height:25px;
+}
+.capsulate{
+  color:#FFFFFF;
+  font-size: 12px;
+  font-weight: 300;
+  margin:-5px 0 -10px 0;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+.inOutTime{
+  color:white;
+  font-size: 14px;
+  font-weight: 500;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+.title{
+  font-weight: 500;
+  font-size: 14px;
+  margin-left:15px;
+  width:100%;
+  height:1px;
+}
+#totalHours{
+  display:flex;
+  flex-direction: column;
+
+}
+.today,.week,.month{
+  font-size:12px;
+  font-weight: 300;
+}
+#todayHours,#weekHours,#monthHours{
+  font-size: 12px;
+  font-weight:400;
+}
+.todayDiv{
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+  padding-right: 20px;
+  justify-content: space-between;
+  font-size: 12px;
+  width:100%;
+  height:20px;
+}
+.weekDiv{
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+  padding-right: 20px;
+  justify-content: space-between;
+  width:100%;
+  font-size: 12px;
+  height:20px;
+}
+.monthDiv{
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+  padding-right: 20px;
+  justify-content: space-between;
+  width:100%;
+  font-size: 12px;
+}
+#weekHoursYellow,#todayHoursYellow,#monthHoursYellow {
+  color: #F2AA52;
+  font-size: 12px;
+  font-weight:400;
+}
+.clockOut{
+  font-size: 16px;
+  font-weight: 500;
+  color:#BD352C;
+ }
+.takeBreak{
+  font-size: 16px;
+  font-weight: 500;
+  color:#4EACCD;
+}
+#clockBreak{
+  display:flex;
+  flex-direction: row;
+  width:100%;
+}
+
+#breakImage{
+  width:50%;
+  background-color: #333A44;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height:93px;
+  background-image: url('../../assets/BreakWithCircle.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+#clockImage{
+  width:50%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #333A44;
+  height:93px;
+  background-image: url('../../assets/WorkWithCircle.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+#bottomDiv{
+  position: absolute;
+  bottom: 47px;
+  width:100%;
+}
+#date{
+  position: absolute;
+  top: 5px;
+  width:100%;
+}
+#coffeeBreakBig{
+  margin: 150px auto 0 auto ;
+  display:block;
+}
+#resume{
+  font-size:16px;
+  font-weight: 500;
+  //margin:0px auto 80px auto;
+  text-align: center;
+  margin-top:20px;
+}
+#chrono2{
+  font-size: 70px;
+  text-align: center;
+  font-weight: 200;
+}
+#milliseconds2{
+  font-size: 22px;
+  font-weight: 200;
+}
+#notebookImage{
+  width:100%;
+  height:55px;
+  background-image: url('../../assets/notebookCircle.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  margin-top:-30px;
+}

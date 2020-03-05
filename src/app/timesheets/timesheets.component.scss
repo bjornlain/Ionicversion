@@ -1,0 +1,161 @@
+#topNav{
+  display: flex;
+  flex-direction: row;
+  width:100%;
+  justify-content: space-between;
+  align-items: center;
+  margin:0 1px 0 1px;
+}
+#timesheet{
+  font-size: 18px;
+  font-weight: bold;
+}
+#plusIcon{
+  height:35px;
+  width:35px;
+}
+.boxMonth{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 20px;
+  width:100%;
+  background-color: #333A44;
+  height:36px;
+  margin-bottom: 4px;
+}
+#hoursOverall{
+  font-size: 14px;
+  font-weight: 500;
+}
+.uText{
+  font-size:12px ;
+  font-weight: 300;
+ }
+.uHours{
+  font-size: 12px;
+  font-weight: 400;
+}
+.textMonth{
+  font-size: 12px;
+  color:white;
+  font-weight:400 ;
+}
+.boxYear{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 20px;
+  width:100%;
+  background-color: white;
+  height:36px;
+  margin-bottom: 4px;
+}
+.textYear{
+  font-size: 12px;
+  color:#000000;
+  font-weight:500;
+}
+.title{
+  font-weight: 500;
+  font-size: 14px;
+  width:100%;
+}
+#totalHours{
+  display:flex;
+  flex-direction: column;
+
+}
+.todayDiv{
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+  padding-right: 20px;
+  justify-content: space-between;
+  font-size: 12px;
+  width:100%;
+  height:20px;
+}
+.weekDiv{
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+  padding-right: 20px;
+  justify-content: space-between;
+  width:100%;
+  font-size: 12px;
+  height:20px;
+}
+.monthDiv{
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+  padding-right: 20px;
+  justify-content: space-between;
+  width:100%;
+  font-size: 12px;
+}
+#hoursOverall{
+  font-size: 14px;
+}
+.total{
+  margin-bottom: 20px;
+}
+.box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding:0 40px 0 20px;
+  width:100%;
+  background-color: #F6F6F6;
+  height:41px;
+  margin-bottom: 4px;
+}
+.textBox{
+  font-size: 14px;
+  font-weight: 500;
+}
+.hours{
+  margin-top: -14px;
+  font-size: 10px;
+  font-weight: 300;
+}
+.columnFlex{
+  display: flex;
+  flex-direction: column;
+}
+.titleWeeks{
+  font-weight: 500;
+  font-size: 14px;
+  margin-left: 20px;
+  width:100%;
+  margin-bottom: 3px;
+}
+#weeks{
+  margin-top:-15px;
+ }
+.text{
+  font-size: 12px;
+  font-weight: 300;
+}
+.textNumber{
+  font-size: 14px;
+  font-weight: 300;
+}
+.margin{
+  margin-bottom: 4px;
+}
+.textBold{
+  font-size: 12px;
+  font-weight: 600;
+}
+.textNumberBold{
+  font-weight: 600;
+  font-size: 14px;
+}
+#overtime{
+    position: absolute;
+    bottom: 90px;
+    width:100%;
+}
