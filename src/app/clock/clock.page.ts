@@ -4,6 +4,12 @@ import {Worklog} from '../models/worklog';
 import {Hours} from '../models/hours';
 import {timer} from 'rxjs';
 import {Router} from '@angular/router';
+import {Worklog2Service} from "../services/worklog2.service";
+import {Token} from "../models/token";
+import {AuthService} from "../services/auth.service";
+import {take} from "rxjs/operators";
+import {Worklog2} from "../models/worklog2";
+
 
 @Component({
   selector: 'clock',
@@ -15,6 +21,7 @@ export class ClockPage {
   clockedIn: boolean = false;
   pauseIn: boolean = false;
   today: Date;
+  monthArray: Worklog2[] = [];
   weekHours: Hours;
   monthHours: Hours;
   weekHoursLeft: Hours;
@@ -27,11 +34,18 @@ export class ClockPage {
   interval = null;
   intervalBreak = null;
   overall;
-  constructor(private worklogService: WorklogService, private router: Router) {
+  token: Token;
+  constructor(private worklogService: WorklogService, private router: Router, private authService: AuthService, private worklogService2: Worklog2Service) {
     this.myDate = new Date().getTime();
     let todayDate = new Date();
+    let firstDayOfMonth = this.worklogService.getFirstDayOfMonth(todayDate.getMonth()).getDate();
+    let lastDayOfMonth = this.worklogService.getLastDayOfMonth(todayDate.getMonth()).getDate();
+
+    this.authService.token.subscribe(x => { if(x)
+      this.worklogService2.getWorkedHours(todayDate.getFullYear(), todayDate.getMonth(), firstDayOfMonth , lastDayOfMonth);
+    });
     this.weekHours = this.worklogService.calculateWeekHours();
-    this.monthHours = this.worklogService.calculateMonthHours(todayDate.getFullYear(), todayDate.getMonth());
+
     if (this.weekHours.minutes > 0) {
       this.weekHoursLeft = new Hours( 40 - this.weekHours.hours - 1, 60 - this.weekHours.minutes, 0);
     } else {
@@ -43,12 +57,10 @@ export class ClockPage {
       this.monthHoursLeft = new Hours(160 - this.monthHours.hours, 60 - this.monthHours.minutes, 0);
     }
   }
+
   clockIn() {
-    if (!this.clockedIn) {
-      this.clockedIn = true;
-    } else {
-      this.clockedIn = false;
-    }
+    this.clockedIn = !this.clockedIn;
+
     this.interval = setInterval(() => {
       this.timeWorking.seconds ++;
       if (this.timeWorking.seconds === 60) {

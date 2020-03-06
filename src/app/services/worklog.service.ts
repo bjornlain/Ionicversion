@@ -119,11 +119,9 @@ export class WorklogService {
         this.monthMinutes = 0;
         this.daysWorked = 0;
         const lastDay = new Date(year, monthNumber + 1, 0);
-        console.log(lastDay);
         const month = lastDay.getTime() - this.getFirstDayOfMonth(monthNumber).getTime();
         this.tempDate = new Date();
         const diffDays = Math.ceil(month / 86400000) + 1; // days
-        console.log('difference in days: ' + diffDays);
         for (let i = 0; i < diffDays; i++) {
             let day = new Date(year, monthNumber, i + 1, 0 , 0 , 0, 0);
            for (const worklog of this.workLogs) {
@@ -139,11 +137,9 @@ export class WorklogService {
                }
            }
        }
-        console.log('month hours : ' + this.monthMinutes);
         const hours = Math.floor(this.monthMinutes / 60);
         const minutes = this.monthMinutes % 60;
         this.monthHour = new Hours(hours, minutes, 0);
-        console.log(this.monthHour);
         return this.monthHour;
     }
     public calculateWeekHours() {
@@ -161,7 +157,6 @@ export class WorklogService {
                 }
             }
         }
-        console.log(this.weekMinutes);
         const hours = Math.floor(this.weekMinutes / 60);
         const minutes = this.weekMinutes % 60;
         this.weekHour = new Hours(hours, minutes, 0);
@@ -208,6 +203,13 @@ export class WorklogService {
         date.setMinutes(0);
         date.setSeconds(0);
         return date;
+    }
+    getLastDayOfMonth(monthNumber: number){
+    let lastDate = new Date(new Date().getUTCFullYear(), monthNumber + 1, 0 );
+    lastDate.setHours(0);
+    lastDate.setMinutes(0);
+    lastDate.setSeconds(0);
+    return lastDate;
     }
     getWeeksInMonth(month, year){
         var weeks=[],
