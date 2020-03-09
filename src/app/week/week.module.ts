@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {WeekComponent} from './week.component';
+import {Add06Pipe} from "../services/add06.pipe";
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import {WeekComponent} from './week.component';
     FormsModule,
     RouterModule.forChild([{ path: '', component: WeekComponent}])
   ],
-  declarations: [WeekComponent]
+    declarations: [WeekComponent, Add06Pipe]
 })
 export class WeekModule {}

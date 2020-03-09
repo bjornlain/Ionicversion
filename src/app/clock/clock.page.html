@@ -45,11 +45,11 @@
                 </div>
                 <div class="weekDiv">
                     <p class="week">This Week</p>
-                    <p id="weekHours">{{weekHours.hours}}:{{weekHours.minutes}}:00</p>
+                    <p id="weekHours">{{weekHours.hours | add0}}:{{weekHours.minutes | add0}}:00</p>
                 </div>
                 <div class="monthDiv">
                     <p class="month">This Month</p>
-                    <p id="monthHours">{{monthHours.hours}}:{{monthHours.minutes}}:00</p>
+                    <p id="monthHours">{{monthHours.hours | add0}}:{{monthHours.minutes | add0}}:00</p>
                 </div>
             </div>
             <div id="balanceWork">
@@ -60,11 +60,11 @@
                 </div>
                 <div class="weekDiv">
                     <p class="week">This Week</p>
-                    <p id="weekHoursYellow">{{weekHoursLeft.hours}}:{{weekHoursLeft.minutes}}:00</p>
+                    <p id="weekHoursYellow">{{weekHoursLeft.hours | add0}}:{{weekHoursLeft.minutes | add0}}:00</p>
                 </div>
                 <div class="monthDiv">
                     <p class="month">This Month</p>
-                    <p id="monthHoursYellow">{{monthHoursLeft.hours}}:{{monthHoursLeft.minutes}}:00</p>
+                    <p id="monthHoursYellow">{{monthHoursLeft.hours | add0}}:{{monthHoursLeft.minutes | add0}}:00</p>
                 </div>
             </div>
         </div>

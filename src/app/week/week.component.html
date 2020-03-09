@@ -8,13 +8,15 @@
     </ion-item>
   </ion-header>
   <div class="boxWeek">
-    <p class="textWeek">WEEK 51</p>
+    <p class="textWeek">WEEK {{weekHours.weekNumber}}</p>
   </div>
-  <div (click)="goToDay()" class="box" *ngFor="let date of dateArray" >
-    <div class="columnFlex"  >
-      <p class="textBox">{{date.date}}</p>
-      <p class="hours">Hours  {{date.hours}}</p>
+  <div *ngIf="allDataReceived">
+    <div (click)="goToDay()" class="box" *ngFor="let date of weekDates" >
+      <div class="columnFlex"  >
+        <p class="textBox">{{date.weekDate}}</p>
+        <p class="hours">Hours {{date.hours.hours |add06}}:{{date.hours.minutes | add06}}:00 </p>
+      </div>
+      <img class="image" src="../../assets/guardian.svg">
     </div>
-    <img class="image" src="../../assets/guardian.svg">
   </div>
 </ion-content>

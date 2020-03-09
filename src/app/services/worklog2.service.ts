@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Token} from "../models/token";
-import {Observable} from "rxjs";
+import {Observable, pipe, Subject} from "rxjs";
 import {Worklog2} from "../models/worklog2";
 import {AuthService} from "./auth.service";
-
+import {last, tap} from "rxjs/operators";
+import {Hours} from "../models/hours";
+import * as moment from 'moment';
+import {WeekHours} from "../models/weekHours";
 
 @Injectable({
     providedIn: 'root',
@@ -12,8 +15,12 @@ import {AuthService} from "./auth.service";
 export class Worklog2Service {
     private authUrl: string;
     private worklogUrl: string;
+    weekHours: WeekHours;
+    monthHour: Hours;
+    monthSelected: Date;
     private workedHoursUrl: string;
-    private admin: JSON = JSON.stringify({
+    private workedHoursDayUrl: string;
+    private admin = JSON.stringify({
         email: "bart@codious.io",
         password: "test1234"
     });
@@ -24,18 +31,9 @@ export class Worklog2Service {
         this.authUrl = 'http://localhost:4100/api/v1/auth.login';
         this.worklogUrl = 'http://localhost:4100/api/v1/worklogs.monthList';
         this.workedHoursUrl = 'http://localhost:4100/api/v1/worklogs.workedHours';
+        this.workedHoursDayUrl = 'http://localhost:4100/api/v1/worklogs.workedHoursDay';
         this.authService.token.subscribe(x => {
             if(x) this.accessToken = x.access_token;
-        });
-    }
-    getWorklogsFromMongo() {
-        const header = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + this.accessToken
-        })
-        this.http.get(this.worklogUrl, { headers: header }).subscribe(x => {
-            this.workLogs = x as Worklog2[];
-            console.log(this.workLogs);
         });
     }
     getWorkedHours(year: number, month: number , startDay: number, endDay: number){
@@ -47,31 +45,74 @@ export class Worklog2Service {
             'startDay': startDay.toString(),
             'endDay': endDay.toString()
         })
-        this.http.get(this.workedHoursUrl, { headers: header }).subscribe(x => {
-            this.workLogs = x as Worklog2[];
-            console.log(this.workLogs);
-        });
+        return this.http.get(this.workedHoursUrl,{ headers: header }).pipe(tap(x => {
+        }));
     }
-    /*
-    getLoggedInUser(auth_token): Observable<any> {
-        const headers = new Headers({
+    getWorkedHoursDay(year: number, month: number , day: number){
+        const header = new HttpHeaders({
             'Content-Type': 'application/json',
-            'Authorization': auth_token
+            'Authorization': 'Bearer ' + this.accessToken,
+            'year': year.toString(),
+            'month': month.toString(),
+            'day': day.toString()
         })
-        return this.http.get(apiUrl, { headers: headers })
-    } */
-    /*  getCars(): Observable<Car[]> {
-          return this.http.get<Car[]>(this.apiUrl);
-      }
-      addCar(car: Car): Observable<Object>{
-          return this.http.post(this.apiUrl, car);
-      }
-
-      removeCar(car: Car): Observable<Object>{
-          return this.http.delete(`${this.apiUrl}/${car._id}`);
-      }
-
-      editCar(car: Car): Observable<Object>{
-          return this.http.put(this.apiUrl, car);
-      } */
+        return this.http.get(this.workedHoursDayUrl,{ headers: header }).pipe(tap(x => {
+        }));
+    }
+    public convertMinutesToHours(minutes: number){
+        const hours = Math.floor(minutes / 60);
+        const minutes2 = minutes % 60;
+        this.monthHour = new Hours(hours, minutes2, 0);
+        return this.monthHour;
+    }
+    getWeeksInMonth(month, year){
+         let weeks = [];
+         let date = moment([year, month ]);
+         let firstDate= moment(date).startOf("month").toDate();
+         let lastDate= moment(date).endOf("month").toDate();
+         let numDays= lastDate.getDate();
+         console.log(lastDate); // Thursday)
+         let weekdays = [
+             "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+         ];
+         var start=1;
+         var end=(7-firstDate.getDay())+1;
+         console.log(weekdays[firstDate.getDay()]);
+         if(weekdays[firstDate.getDay()] === "Sunday"){
+             start = 2;
+             end = start +6;
+         } else if( weekdays[firstDate.getDay()] === "Saturday"){
+             start = 3;
+             end = start +6;
+         }
+         while(start<=numDays){
+             weeks.push({start:start,end:end});
+             start = end + 1;
+             end = end + 7;
+             if(end>numDays)
+                 end=numDays;
+         }
+         for(let i = 0; i < weeks.length ; i++) {
+             let date = new Date(year, month, weeks[i].end);
+             if(weekdays[date.getDay()] === "Sunday"){
+                 weeks[i].end -= 2 ;
+             }
+             if(weekdays[date.getDay()] === "Saturday"){
+                 weeks[i].end -= 1 ;
+             }
+         }
+         return weeks;
+    }
+    public getWeekHours(): WeekHours{
+        return this.weekHours;
+    }
+    public setWeekHours(weekHours: WeekHours){
+        this.weekHours = weekHours;
+    }
+    public setMonthSelected (date: Date){
+        this.monthSelected = date;
+    }
+    public getMonthSelected(): Date{
+        return this.monthSelected;
+    }
 }

@@ -16,7 +16,7 @@
     </select>
   </div>
   <div id="totalHours">
-    <div class="todayDiv total">
+    <div *ngIf="monthHoursReceived" class="todayDiv total">
       <p class="title">TOTAL HOURS</p>
       <p id="hoursOverall">{{monthHours.hours | add03}}:{{monthHours.minutes | add03}}:{{monthHours.seconds | add03}}</p>
     </div>
@@ -28,14 +28,14 @@
       <p class="uText">Official holidays</p>
       <p class="uHours">1</p>
     </div>
-    <div class="monthDiv">
+    <div *ngIf="monthHoursReceived" class="monthDiv">
       <p class="uText">Average hours/day</p>
-     <p class="uHours">{{averageHoursDay.hours | add05}}:{{averageHoursDay.minutes | add05}}:00</p>
+      <p class="uHours">{{averageHoursDay.hours | add05}}:{{averageHoursDay.minutes | add05}}:00</p>
     </div>
   </div>
-  <div id="weeks">
-    <p class="titleWeeks">WEEKS</p>
-    <div *ngFor="let week of weekHoursMonth" (click)="goToWeek()" class="box">
+  <div *ngIf="allDataReceived" id="weeks">
+    <p  class="titleWeeks">WEEKS</p>
+    <div  *ngFor="let week of weekHoursMonth" (click)="goToWeek(week)" class="box">
       <div class="columnFlex">
         <p class="textBox">Week {{week.weekNumber}}</p>
         <p class="hours">Hours {{week.hours.hours | add05}}:{{week.hours.minutes | add05}}:00</p>

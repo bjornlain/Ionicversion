@@ -115,55 +115,8 @@ export class WorklogService {
     public getDaysWorked(){
         return this.daysWorked;
     }
-   public calculateMonthHours(year: number, monthNumber: number) {
-        this.monthMinutes = 0;
-        this.daysWorked = 0;
-        const lastDay = new Date(year, monthNumber + 1, 0);
-        const month = lastDay.getTime() - this.getFirstDayOfMonth(monthNumber).getTime();
-        this.tempDate = new Date();
-        const diffDays = Math.ceil(month / 86400000) + 1; // days
-        for (let i = 0; i < diffDays; i++) {
-            let day = new Date(year, monthNumber, i + 1, 0 , 0 , 0, 0);
-           for (const worklog of this.workLogs) {
-               if (day.getTime() - worklog.date.getTime() < 86400000 && day.getTime() - worklog.date.getTime() >= 0) {
-                   if (this.monthMinutes === 0 || worklog.date.getTime() - this.tempDate.getTime() >= 86400000) {
-                       this.tempDate = worklog.date;
-                       this.daysWorked++;
-                   }
-                   this.monthMinutes += worklog.worked;
-                   if ( worklog.date.getTime() - this.tempDate.getTime() === 0) {
-                       this.tempDate = worklog.date;
-                   }
-               }
-           }
-       }
-        const hours = Math.floor(this.monthMinutes / 60);
-        const minutes = this.monthMinutes % 60;
-        this.monthHour = new Hours(hours, minutes, 0);
-        return this.monthHour;
-    }
-    public calculateWeekHours() {
-        const week = new Date().getTime() - this.getMondayOfWeek(new Date()).getTime();
-        const todayZero = new Date();
-        todayZero.setHours(0);
-        todayZero.setMinutes(0);
-        todayZero.setSeconds(0);
-        const diffDays = Math.ceil(week / 86400000); // days
-        for (let i = 0; i < diffDays; i++) {
-            todayZero.setDate(todayZero.getDate() - i);
-            for (const worklog of this.workLogs) {
-                if (todayZero.getTime() - worklog.date.getTime() < 86400000 && todayZero.getTime() - worklog.date.getTime() > 0) {
-                    this.weekMinutes += worklog.worked;
-                }
-            }
-        }
-        const hours = Math.floor(this.weekMinutes / 60);
-        const minutes = this.weekMinutes % 60;
-        this.weekHour = new Hours(hours, minutes, 0);
-        return this.weekHour;
-    }
     calculateWeekHoursperMonth(month: string , year: number) {
-        let monthNumber = this.monthNames.indexOf(month) ;
+       /* let monthNumber = this.monthNames.indexOf(month) ;
         this.weekHoursMonth = [];
         let weekArray = this.getWeeksInMonth(monthNumber, year);
         for (let i = 0; i < weekArray.length; i++){
@@ -184,35 +137,10 @@ export class WorklogService {
             this.weekHoursMonth[i].hours =  new Hours(hours, minutes, 0);
         }
         console.log(this.weekHoursMonth);
-        return this.weekHoursMonth;
-    }
-    getMondayOfWeek(d) {
-        d = new Date(d);
-        const day = d.getDay();
-        const weekDate = new Date();
-        const diff = d.getDate() - day + (day === 0 ? -6 : 1);
-        weekDate.setDate(diff);
-        weekDate.setHours(0);
-        weekDate.setMinutes(0);
-        weekDate.setSeconds(0);
-        return weekDate;
-    }
-    getFirstDayOfMonth(monthNumber: number) {
-        const date = new Date(new Date().getUTCFullYear(), monthNumber, 1 );
-        date.setHours(0);
-        date.setMinutes(0);
-        date.setSeconds(0);
-        return date;
-    }
-    getLastDayOfMonth(monthNumber: number){
-    let lastDate = new Date(new Date().getUTCFullYear(), monthNumber + 1, 0 );
-    lastDate.setHours(0);
-    lastDate.setMinutes(0);
-    lastDate.setSeconds(0);
-    return lastDate;
+        return this.weekHoursMonth;/*/
     }
     getWeeksInMonth(month, year){
-        var weeks=[],
+       /* var weeks=[],
             firstDate=new Date(year, month, 1),
             lastDate=new Date(year, month+1, 0),
             numDays= lastDate.getDate();
@@ -246,12 +174,12 @@ export class WorklogService {
                 weeks[i].end -= 1 ;
             }
         }
-        return weeks;
+        return weeks; */
     }
     getWeekOfYear(d: Date){
-    var dayNum = d.getUTCDay() || 7;
+   /* var dayNum = d.getUTCDay() || 7;
     d.setUTCDate(d.getUTCDate() + 4 - dayNum);
     var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
-    return Math.ceil((((d - yearStart) / 86400000) + 1)/7);
+    return Math.ceil((((d - yearStart) / 86400000) + 1)/7); */
     }
 }
