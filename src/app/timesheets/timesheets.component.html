@@ -30,7 +30,7 @@
     </div>
     <div *ngIf="monthHoursReceived" class="monthDiv">
       <p class="uText">Average hours/day</p>
-      <p class="uHours">{{averageHoursDay.hours | add05}}:{{averageHoursDay.minutes | add05}}:00</p>
+      <p class="uHours">{{averageHoursDay.hours | add03}}:{{averageHoursDay.minutes | add03}}:00</p>
     </div>
   </div>
   <div *ngIf="allDataReceived" id="weeks">
@@ -38,9 +38,13 @@
     <div  *ngFor="let week of weekHoursMonth" (click)="goToWeek(week)" class="box">
       <div class="columnFlex">
         <p class="textBox">Week {{week.weekNumber}}</p>
-        <p class="hours">Hours {{week.hours.hours | add05}}:{{week.hours.minutes | add05}}:00</p>
+        <p class="hours">Hours {{week.hours.hours | add03}}:{{week.hours.minutes | add03}}:00</p>
       </div>
-      <img src="../../assets/monitor.svg">
+      <div id="rowFlex">
+        <img class="monitor" src="../../assets/monitor.svg">
+        <img src="../../assets/ArrowRight.png">
+      </div>
+
     </div>
   </div>
   <div id="overtime">

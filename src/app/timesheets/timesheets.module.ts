@@ -3,10 +3,9 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import {TimesheetsComponent} from './timesheets.component';
 import {Add03Pipe} from "../services/add03.pipe";
-import {Add05Pipe} from "../services/add05.pipe";
+
 
 @NgModule({
     imports: [
@@ -18,6 +17,6 @@ import {Add05Pipe} from "../services/add05.pipe";
     exports: [
         Add03Pipe
     ],
-    declarations: [TimesheetsComponent, Add03Pipe, Add05Pipe]
+    declarations: [TimesheetsComponent, Add03Pipe]
 })
 export class TimeSheetsModule {}

@@ -35,11 +35,22 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding:0 40px 0 20px;
+  padding:0 20px 0 20px;
   width:100%;
   background-color: #F6F6F6;
   height:41px;
   margin-bottom: 4px;
+}
+#arrowLeft{
+  margin-right:10px;
+  width:9px;
+  height:9px;
+}
+.rowFlex{
+  justify-content: center;
+  align-items: center ;
+  display: flex;
+  flex-direction: row;
 }
 .textBox{
   font-size: 14px;
@@ -55,6 +66,7 @@
   flex-direction: column;
 }
 .image{
+  margin-right: 10px;
   height:23px;
   width:23px;
 }

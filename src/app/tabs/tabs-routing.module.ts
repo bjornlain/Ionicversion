@@ -28,6 +28,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'createWorklog',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+                import('../create-worklog/create-worklog.module').then(m => m.CreateWorklogModule)
+          }
+        ]
+      },
+      {
         path: 'day',
         children: [
           {
@@ -88,8 +98,18 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'worklog-details',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+                import('../worklog-details/worklog-details.module').then(m => m.WorklogDetailsModule)
+          }
+        ]
+      },
+      {
         path: '',
-        redirectTo: '/tabs/day',
+        redirectTo: '/tabs/createWorklog',
         pathMatch: 'full'
       }
     ]

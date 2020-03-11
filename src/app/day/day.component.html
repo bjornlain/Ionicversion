@@ -2,34 +2,38 @@
   <ion-header collapse="condense">
     <ion-item>
       <div id="topNav">
-        <p (click)="goBack()" id="week">Week 51</p>
-        <ion-icon id="plusIcon" name="add-circle"></ion-icon>
+      <div id="row">
+        <img id="arrowLeft" src="../../assets/ArrowLeft.png">
+        <p (click)="goBack()" id="week">Week {{weekSelected}}</p>
+      </div>
+        <ion-icon (click)="createNewWorklog()" id="plusIcon" name="add-circle"></ion-icon>
       </div>
     </ion-item>
   </ion-header>
   <div class="boxDay">
-    <p class="textDay">MON, 23 DECEMBER</p>
+    <p class="textDay">{{dayString}}</p>
     <div id="rowFlex">
-      <p id="totalHours">08:17:31</p>
+      <p id="totalHours">{{dayHours.hours | add04}}:{{dayHours.minutes | add04}}:00</p>
       <img src="../../assets/Work_GladiatorEquip_White.svg">
     </div>
 
   </div>
-  <div class="box"  *ngFor="let task of worklogHoursArray" >
-    <div class="columnFlex"  >
-      <p class="textBox">{{task.worklog.name}}</p>
-      <p class="description">{{task.worklog.description}}</p>
-    </div>
-    <div class="dots">
-      <p class="hours">{{task.hours.hours | add04}}:{{task.hours.minutes | add04}}:00</p>
-      <img class="dotImage" src="../../assets/Edit%20Hours-black.svg">
-    </div>
+  <div *ngIf="allDataReceived">
+    <div class="box"  *ngFor="let task of dayWorklogs" >
+      <div class="columnFlex" >
+        <p class="textBox">{{task.description}}</p>
+      </div>
+      <div class="dots">
+        <p class="hours">{{task.hours.hours | add04}}:{{task.hours.minutes | add04}}:00</p>
+        <img class="dotImage" src="../../assets/Edit%20Hours-black.svg">
+      </div>
+  </div>
 
   </div>
   <div id="overall">
     <div class="todayDiv margin">
       <p class="textTotalHours">TOTAL HOURS</p>
-      <p class="textNumberTotalHours">08:17:31</p>
+      <p class="textNumberTotalHours">{{dayHours.hours | add04}}:{{dayHours.minutes | add04}}:00</p>
     </div>
     <div class="todayDiv margin">
       <p class="textBreak">Break time</p>

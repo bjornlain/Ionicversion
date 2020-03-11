@@ -2,29 +2,33 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Token} from "../models/token";
 import {Observable, pipe, Subject} from "rxjs";
-import {Worklog2} from "../models/worklog2";
+import {Worklog} from "../models/worklog";
 import {AuthService} from "./auth.service";
 import {last, tap} from "rxjs/operators";
 import {Hours} from "../models/hours";
 import * as moment from 'moment';
 import {WeekHours} from "../models/weekHours";
+import {WorklogSend} from "../models/worklogSend";
 
 @Injectable({
     providedIn: 'root',
 })
-export class Worklog2Service {
+export class WorklogService {
     private authUrl: string;
     private worklogUrl: string;
     weekHours: WeekHours;
     monthHour: Hours;
+    private weekSelected: number;
     monthSelected: Date;
+    daySelected: Date;
     private workedHoursUrl: string;
     private workedHoursDayUrl: string;
+    private createWorklogUrl: string;
     private admin = JSON.stringify({
         email: "bart@codious.io",
         password: "test1234"
     });
-    public workLogs: Worklog2[] = [];
+    public workLogs: Worklog[] = [];
     private accessToken : string = undefined;
     options = {headers: {'Content-Type': 'application/json'}};
     constructor(private http: HttpClient , private authService: AuthService) {
@@ -32,6 +36,7 @@ export class Worklog2Service {
         this.worklogUrl = 'http://localhost:4100/api/v1/worklogs.monthList';
         this.workedHoursUrl = 'http://localhost:4100/api/v1/worklogs.workedHours';
         this.workedHoursDayUrl = 'http://localhost:4100/api/v1/worklogs.workedHoursDay';
+        this.createWorklogUrl = 'http://localhost:4100/api/v1/worklogs.create';
         this.authService.token.subscribe(x => {
             if(x) this.accessToken = x.access_token;
         });
@@ -56,7 +61,17 @@ export class Worklog2Service {
             'month': month.toString(),
             'day': day.toString()
         })
-        return this.http.get(this.workedHoursDayUrl,{ headers: header }).pipe(tap(x => {
+        return this.http.get(this.workedHoursDayUrl, { headers: header }).pipe(tap(x => {
+        }));
+    }
+    createNewWorklog(project: string, task: string, description: string, user: string, worked: number, startDate: Date, endDate: Date){
+        const header = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + this.accessToken
+        })
+        let worklog = new WorklogSend( false, startDate, endDate, description, task, user, worked);
+        console.log(worklog);
+        return this.http.post(this.createWorklogUrl,  { body: JSON.stringify(worklog) }, {headers: header }).pipe(tap(x => {
         }));
     }
     public convertMinutesToHours(minutes: number){
@@ -114,5 +129,17 @@ export class Worklog2Service {
     }
     public getMonthSelected(): Date{
         return this.monthSelected;
+    }
+    public setDaySelected(date:Date){
+        this.daySelected = date;
+    }
+    public getDaySelected(): Date{
+        return this.daySelected;
+    }
+    public getWeekSelected(): number {
+        return this.weekSelected;
+    }
+    public setWeekSelected(value: number) {
+        this.weekSelected = value;
     }
 }

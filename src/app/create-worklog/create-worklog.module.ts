@@ -3,16 +3,15 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {ClockPage} from './clock.page';
-import {Add0Pipe} from '../services/add0.pipe';
+import {CreateWorklogComponent} from "./create-worklog.component";
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{path: '', component: ClockPage}])
+    RouterModule.forChild([{path: '', component: CreateWorklogComponent}])
   ],
-  declarations: [ClockPage, Add0Pipe]
+  declarations: [CreateWorklogComponent]
 })
-export class ClockModule {}
+export class CreateWorklogModule {}

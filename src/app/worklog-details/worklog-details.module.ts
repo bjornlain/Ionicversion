@@ -3,16 +3,15 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {DayComponent} from "./day.component";
-import {Add04Pipe} from "../services/add04.pipe";
+import {WorklogDetailsComponent} from "./worklog-details.component";
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{path: '', component: DayComponent}])
+    RouterModule.forChild([{path: '', component: WorklogDetailsComponent}])
   ],
-  declarations: [DayComponent, Add04Pipe]
+  declarations: [WorklogDetailsComponent]
 })
-export class DayModule {}
+export class WorklogDetailsModule {}

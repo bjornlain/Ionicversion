@@ -1,0 +1,33 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-item>
+      <div id="topNav">
+        <p (click)="goBackToDay()" id="cancel">Cancel</p>
+      </div>
+    </ion-item>
+  </ion-header>
+  <ion-select id="project" interface="popover">
+    <ion-select-option value="Project">Project</ion-select-option>
+  </ion-select>
+  <p class="required">*Select a project</p>
+  <p class="title">Project/task</p>
+  <ion-select id="project"  [(ngModel)]="task" interface="popover">
+    <ion-select-option value="793707516865cd044e87ef01">793707516865cd044e87ef01</ion-select-option>
+  </ion-select>
+  <p class="required">*Insert a title of the task / choose a task</p>
+  <p class="title">Description</p>
+  <ion-textarea [(ngModel)]="description" id="description"></ion-textarea>
+  <p class="required">*Make a brief description of the task</p>
+  <div class="startEnd">
+    <p class="start">Start-time</p>
+    <p class="end">End-time</p>
+  </div>
+  <div id="pickers">
+    <ion-datetime (ionChange)="updateStartingHours(startHours.value)" #startHours id="startTimePicker" display-format="HH:mm" picker-format="HH:mm" value="2020-03-10T08:00Z"></ion-datetime>
+    <ion-datetime (ionChange)="updateEndingHours(endHours.value)" #endHours id="endTimePicker" display-format="HH:mm" picker-format="HH:mm" value="2020-03-10T11:00Z"></ion-datetime>
+  </div>
+  <div (click)="saveTask()" id="schedule">
+    <p id="scheduleText">SAVE NEW SCHEDULE</p>
+    <img src="../../assets/save.svg">
+  </div>
+</ion-content>

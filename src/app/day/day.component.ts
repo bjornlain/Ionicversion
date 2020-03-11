@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {Worklog} from "../models/worklog";
-import {Router} from "@angular/router";
+import {NavigationEnd, Router} from "@angular/router";
 import {Hours} from "../models/hours";
 import {WorklogHours} from "../models/worklogHours";
+import {WorklogService} from "../services/worklog.service";
+import {WeekDate} from "../models/WeekDate";
+import {AuthService} from "../services/auth.service";
+import {DayDate} from "../models/dayDate";
 
 @Component({
   selector: 'app-day',
@@ -10,44 +14,72 @@ import {WorklogHours} from "../models/worklogHours";
   styleUrls: ['./day.component.scss'],
 })
 export class DayComponent implements OnInit {
-  taskArray: Worklog[] = [{
-    id: '001',
-    name: 'Set ut perspiciatis.',
-    worked: 40,
-    description: 'Set ut perspiciatis.',
-    date : new Date(2020, 2,  3, 0, 0, 0)
-  },
-    {
-      id: '002',
-      name: 'Set ut perspiciatis.',
-      worked: 60,
-      description: 'Set ut perspiciatis.',
-      date : new Date(2020, 2,  3, 0, 0, 0)
-    },
-    {
-      id: '003',
-      name: 'Set ut perspiciatis.',
-      worked: 120,
-      description: 'Coffee-break.',
-      date : new Date(2020, 2,  3, 0, 0, 0)
-    },
-    {
-      id: '004',
-      name: 'Meeting intern',
-      worked: 140,
-      description: 'Meeting.',
-      date : new Date(2020, 2,  3, 0, 0, 0)
-    }
-  ];
+  daySelected: Date;
+  dayString : string;
+  dayWorklogs: DayDate[] = [];
+  counter: number;
+  weekSelected: number;
+  allDataReceived: boolean = false;
+  monthNames: string[] = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE',
+    'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
+  weekNames: string[] = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  worklogsDay: Worklog[] = [];
+  dayHours= new Hours(0, 0, 0);
   worklogHoursArray: WorklogHours[] = [];
-  constructor(private router: Router) { }
+  constructor(private router: Router, private worklogService: WorklogService, private authService: AuthService) { }
 
   ngOnInit() {
-    for (const task of this.taskArray) {
-      this.worklogHoursArray.push(new WorklogHours(task, new Hours(Math.floor(task.worked / 60), task.worked % 60 , 0)));
-    }
+    this.router.events.subscribe((ev) => {
+      if (ev instanceof NavigationEnd) {
+        this.counter = 0;
+        this.dayWorklogs= [];
+        this.weekSelected = this.worklogService.getWeekSelected();
+        this.daySelected = this.worklogService.getDaySelected();
+        console.log(this.daySelected);
+        this.getWorklogsDay();
+      }
+    });
   }
   goBack(){
     this.router.navigate(['/tabs/week']);
+  }
+  getWorklogsDay(){
+    this.authService.token.subscribe(x => { if(x)
+      if(x.access_token != null){
+        this.worklogService.getWorkedHoursDay(this.daySelected.getFullYear(), this.daySelected.getMonth(), this.daySelected.getDate())
+            .subscribe( x => {
+          this.worklogsDay = x as Worklog[];
+          if(this.worklogsDay.length > 0){
+            console.log(this.worklogsDay);
+            let dayMinutes = 0;
+            let yearSelected = this.worklogService.getMonthSelected().getFullYear();
+            let monthSelected = this.worklogService.getMonthSelected().getMonth();
+            for (let day of this.worklogsDay){
+              console.log(day.worked);
+              dayMinutes += day.worked;
+              const hours = Math.floor(day.worked/ 60);
+              const minutes = day.worked % 60;
+              let date = new Date(yearSelected, monthSelected, this.daySelected.getDate());
+              this.dayWorklogs[this.counter] = new DayDate(new Hours(hours, minutes, 0), this.daySelected.getDate() ,
+                  date, day.description);
+              this.counter++;
+            }
+            const hours = Math.floor(dayMinutes/ 60);
+            const minutes = dayMinutes % 60;
+            this.dayHours = new Hours(hours, minutes, 0);
+          }
+          if(this.counter === this.worklogsDay.length && this.worklogsDay.length > 0){
+            console.log(this.dayWorklogs);
+            this.dayWorklogs.sort((a, b) => (a.date.getDate() > b.date.getDate()) ? 1 : -1);
+            this.allDataReceived = true;
+          }
+          this.dayString = this.weekNames[this.daySelected.getDay()] + ", " + this.daySelected.getDate()
+                  + " " + this.monthNames[this.daySelected.getMonth()];
+        });
+      }
+    });
+  }
+  createNewWorklog(){
+    this.router.navigate(['/tabs/createWorklog']);
   }
 }

@@ -1,13 +1,16 @@
-export class Worklog2{
+export class Worklog{
     id: string;
     deleted: boolean;
-    date: Date;
+    startDate: Date;
+    endDate: Date;
     description: string;
     task: string;
     user: string;
     worked: number;
-    constructor(  id: string, deleted: boolean, date: Date, description: string, task: string, user: string, worked: number) {
-        this.date = date;
+    constructor(  id: string, deleted: boolean, startDate: Date, endDate: Date,
+                  description: string, task: string, user: string, worked: number) {
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.description = description;
         this.worked = worked;
         this.id = id;

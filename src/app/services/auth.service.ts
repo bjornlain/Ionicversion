@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Token} from "../models/token";
 import {BehaviorSubject, Observable} from "rxjs";
-import {Worklog2} from "../models/worklog2";
+import {Worklog} from "../models/worklog";
 
 
 @Injectable({
