@@ -7,6 +7,7 @@ import {WorklogService} from "../services/worklog.service";
 import {WeekDate} from "../models/WeekDate";
 import {AuthService} from "../services/auth.service";
 import {DayDate} from "../models/dayDate";
+import {start} from "repl";
 
 @Component({
   selector: 'app-day',
@@ -59,9 +60,11 @@ export class DayComponent implements OnInit {
               dayMinutes += day.worked;
               const hours = Math.floor(day.worked/ 60);
               const minutes = day.worked % 60;
+              let startDate = new Date(day.startDate);
+              let endDate = new Date(day.endDate);
               let date = new Date(yearSelected, monthSelected, this.daySelected.getDate());
               this.dayWorklogs[this.counter] = new DayDate(new Hours(hours, minutes, 0), this.daySelected.getDate() ,
-                  date, day.description);
+                  startDate, endDate, day.description);
               this.counter++;
             }
             const hours = Math.floor(dayMinutes/ 60);
@@ -70,7 +73,7 @@ export class DayComponent implements OnInit {
           }
           if(this.counter === this.worklogsDay.length && this.worklogsDay.length > 0){
             console.log(this.dayWorklogs);
-            this.dayWorklogs.sort((a, b) => (a.date.getDate() > b.date.getDate()) ? 1 : -1);
+            this.dayWorklogs.sort((a, b) => (a.startDate.getTime() > b.startDate.getTime()) ? 1 : -1);
             this.allDataReceived = true;
           }
           this.dayString = this.weekNames[this.daySelected.getDay()] + ", " + this.daySelected.getDate()
