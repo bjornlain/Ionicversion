@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {WorklogDetailsComponent} from './worklog-details.component';
 import {Add07Pipe} from "../services/add07.pipe";
+import {Add08Pipe} from "../services/add08.pipe";
 
 @NgModule({
     imports: [
@@ -13,6 +14,6 @@ import {Add07Pipe} from "../services/add07.pipe";
         FormsModule,
         RouterModule.forChild([{path: '', component: WorklogDetailsComponent}])
     ],
-    declarations: [WorklogDetailsComponent, Add07Pipe]
+    declarations: [WorklogDetailsComponent, Add07Pipe, Add08Pipe]
 })
 export class WorklogDetailsModule {}

@@ -29,6 +29,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'createWorklogDate',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+                import('../create-worklog-date/create-worklog-date.module').then(m => m.CreateWorklogDateModule)
+          }
+        ]
+      },
+      {
         path: 'createWorklog',
         children: [
           {
@@ -107,6 +117,11 @@ const routes: Routes = [
                 import('../settings/settings.module').then(m => m.SettingsModule)
           }
         ]
+      },
+      {
+        path: '',
+        redirectTo: '/tabs/createWorklogDate',
+        pathMatch: 'full'
       }
     ]
   },

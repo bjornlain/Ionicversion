@@ -1,4 +1,5 @@
 import {Hours} from "./hours";
+import {Task} from './task';
 
 export class DayDate{
     hours: Hours;
@@ -7,8 +8,8 @@ export class DayDate{
     startDate: Date;
     endDate: Date;
     description: string;
-    task: string;
-    constructor(id: string, hours: Hours , day: number, startDate: Date, endDate: Date, description: string , task: string) {
+    task: Task;
+    constructor(id: string, hours: Hours , day: number, startDate: Date, endDate: Date, description: string , task: Task) {
         this.hours = hours;
         this.id = id;
         this.day = day;

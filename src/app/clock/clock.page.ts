@@ -25,6 +25,7 @@ export class ClockPage {
   weekHoursLeft: Hours;
   monthHoursLeft: Hours;
   todayHours: Hours;
+  clockInTime: Hours;
   workLog: Worklog;
   todayDate: Date;
   worklogsMonth: Worklog[];
@@ -81,7 +82,7 @@ export class ClockPage {
   }
   clockIn() {
     this.clockedIn = !this.clockedIn;
-
+    this.clockInTime = new Hours(new Date().getHours(), new Date().getMinutes(), 0);
     this.interval = setInterval(() => {
       this.timeWorking.seconds ++;
       if (this.timeWorking.seconds === 60) {

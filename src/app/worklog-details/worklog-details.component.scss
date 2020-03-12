@@ -185,6 +185,7 @@ worrklogdetails module
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    margin-left:-8px;
 }
 #timesHours{
     display: flex;
@@ -192,7 +193,7 @@ worrklogdetails module
     justify-content: space-around;
     align-items: center;
     margin-top: -25px;
-    margin-left: -12px;
+    margin-left: -22px;
 }
 .mediumText{
     font-size: 14px;
@@ -204,7 +205,7 @@ worrklogdetails module
 }
 #totalTime{
     display: flex;
-    margin-left: 25px;
+    margin-left: 18px;
     flex-direction: column;
 }
 .totalHours{

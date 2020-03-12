@@ -14,7 +14,12 @@ export class WorklogDetailsComponent implements OnInit {
   weekSelected: number;
   daySelected: Date;
   taskTitle: string;
+  taskDescription: string;
   worklogSelected: DayDate;
+  todayHours: Hours;
+  startHours: Hours;
+  timeSpendHours: Hours;
+  endHours: Hours;
   monthNames: string[] = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE',
     'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
   weekNames: string[] = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -28,13 +33,29 @@ export class WorklogDetailsComponent implements OnInit {
     this.weekSelected = this.worklogService.getWeekSelected();
     this.daySelected = this.worklogService.getDaySelected();
     this.worklogSelected = this.worklogService.getWorklogSelected();
-    this.taskTitle = "kik";
+    this.taskTitle = this.worklogSelected.task.key;
+    let startDate = new Date(this.worklogSelected.startDate);
+    let endDate = new Date(this.worklogSelected.endDate);
+    this.startHours = new Hours(startDate.getHours(), startDate.getMinutes(),0);
+    this.endHours = new Hours(endDate.getHours(), endDate.getMinutes(),0);
+    let timeSpend = (this.endHours.hours * 60 + this.endHours.minutes) - (this.startHours.hours * 60 + this.startHours.minutes);
+    this.timeSpendHours = new Hours(Math.floor(timeSpend / 60), (timeSpend % 60), 0);
+    this.todayHours = new Hours(new Date().getHours(), new Date().getMinutes(), 0);
     console.log(this.worklogSelected);
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
+        let startDate = new Date(this.worklogSelected.startDate);
+        let endDate = new Date(this.worklogSelected.endDate);
+        this.startHours = new Hours(startDate.getHours(), startDate.getMinutes(),0);
+        this.endHours = new Hours(endDate.getHours(), endDate.getMinutes(),0);
+        this.todayHours = new Hours(new Date().getHours(), new Date().getMinutes(), 0);
         this.weekSelected = this.worklogService.getWeekSelected();
         this.worklogSelected = this.worklogService.getWorklogSelected();
+        this.taskTitle = this.worklogSelected.task.key;
+        this.taskDescription = this.worklogSelected.description;
         this.daySelected = this.worklogService.getDaySelected();
+        let timeSpend = (this.endHours.hours * 60 + this.endHours.minutes) - (this.startHours.hours * 60 + this.startHours.minutes);
+        this.timeSpendHours = new Hours(Math.floor(timeSpend / 60), (timeSpend % 60), 0);
         console.log(this.worklogSelected);
         this.getWorklogDetails();
       }
