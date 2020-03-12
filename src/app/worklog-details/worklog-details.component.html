@@ -1,3 +1,51 @@
-<p>
-  worklog-details works!
-</p>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-item>
+      <div id="topNav">
+        <div id="row">
+          <img id="arrowLeft" src="../../assets/ArrowLeft.png">
+          <p (click)="goBack()" class="mediumText">Week {{weekSelected}}</p>
+        </div>
+        <ion-icon id="plusIcon" name="add-circle"></ion-icon>
+      </div>
+    </ion-item>
+  </ion-header>
+  <div class="boxDay">
+    <p class="textDay regularText">{{dayString}}</p>
+    <div id="rowFlex">
+      <p id="totalHours">{{dayHours.hours | add07}}:{{dayHours.minutes | add07}}:00</p>
+      <img src="../../assets/Work_GladiatorEquip_White.svg">
+    </div>
+  </div>
+  <div id="project">
+    <p class="mediumText">Sed ut perspiciatis.</p>
+    <img (click)="editWorklog()" class="dotImage" src="../../assets/Edit%20Hours-black.svg">
+  </div>
+  <div id="task">
+    <p class="mediumText">Project/task</p>
+    <p class="taskText regularText">{{taskTitle}}</p>
+  </div>
+  <div id="description">
+    <p class="mediumText">Description</p>
+    <p class="descriptionText regularText"> Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+      accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+      veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
+      quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
+      ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem.</p>
+  </div>
+  <div id="timesText">
+    <p class="mediumText">Time today</p>
+    <p class="mediumText">Start-time</p>
+    <p class="mediumText">End-time</p>
+  </div>
+  <div id="timesHours">
+    <p class="regularText">02:00:00</p>
+    <p class="regularText">08:00:00</p>
+    <p class="regularText">10:00:00</p>
+  </div>
+  <div id="totalTime">
+    <p class="mediumText">Total time spend</p>
+    <p class="regularText totalHours">04:00:00</p>
+  </div>
+</ion-content>

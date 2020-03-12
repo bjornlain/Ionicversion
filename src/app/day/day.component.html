@@ -19,15 +19,15 @@
 
   </div>
   <div *ngIf="allDataReceived">
-    <div class="box"  *ngFor="let task of dayWorklogs" >
+    <div  class="box"  *ngFor="let task of dayWorklogs" >
       <div class="columnFlex" >
         <p class="textBox">{{task.description}}</p>
       </div>
       <div class="dots">
         <p class="hours">{{task.hours.hours | add04}}:{{task.hours.minutes | add04}}:00</p>
-        <img class="dotImage" src="../../assets/Edit%20Hours-black.svg">
+        <img (click)="goToDetails(task)" class="dotImage" src="../../assets/Edit%20Hours-black.svg">
       </div>
-  </div>
+    </div>
 
   </div>
   <div id="overall">

@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: 'add06'
+    name: 'add07'
 })
-export class Add06Pipe implements PipeTransform {
+export class Add07Pipe implements PipeTransform {
 
     transform(value: any, ...args: any[]): any {
         if(value < 10) {

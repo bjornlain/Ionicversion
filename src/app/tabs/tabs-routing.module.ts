@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
@@ -83,17 +84,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../timesheets/timesheets.module').then(m => m.TimeSheetsModule)
-          }
-        ]
-      },
-      {
-        path: 'settings',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-                import('../settings/settings.module').then(m => m.SettingsModule)
+                import('../timesheets/timesheets.module').then(m => m.TimeSheetsModule)
           }
         ]
       },
@@ -108,15 +99,20 @@ const routes: Routes = [
         ]
       },
       {
-        path: '',
-        redirectTo: '/tabs/createWorklog',
-        pathMatch: 'full'
+        path: 'settings',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+                import('../settings/settings.module').then(m => m.SettingsModule)
+          }
+        ]
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/timesheets',
+    redirectTo: '/tabs/worklog-details',
     pathMatch: 'full'
   }
 ];

@@ -11,8 +11,8 @@ import {Hours} from "../models/hours";
 })
 export class CreateWorklogComponent implements OnInit {
   startMinutes: number = 540;
-  startDate: Date;
-  endDate: Date;
+  startDate: Date = new Date();
+  endDate: Date = new Date();
   endMinutes: number = 720;
   worked: number;
   description: string = "";
@@ -37,34 +37,38 @@ export class CreateWorklogComponent implements OnInit {
   updateStartingHours($event) {
     console.log($event);
     this.startMinutes = (+$event.substr(11, 2) * 60) + +$event.substr(14, 2);
-    this.startDate.setHours(+$event.substr(11, 2));
-    this.startDate.setMinutes(+$event.substr(14, 2));
-    console.log(this.startDate);
   }
   updateEndingHours($event) {
     console.log($event);
     this.endMinutes = (+$event.substr(11, 2) * 60) + +$event.substr(14, 2);
-    this.endDate.setHours(+$event.substr(11, 2));
-    this.endDate.setMinutes(+$event.substr(14, 2));
-    console.log(this.endDate);
   }
   saveTask() {
     this.router.navigate(['/tabs/day']);
-    console.log(this.startDate);
-    console.log(this.endDate);
     this.authService.token.subscribe(x => {
       if (x) {
         if (x.access_token != null) {
+          console.log(this.startMinutes + " " + this.endMinutes);
+          console.log(this.endMinutes > this.startMinutes);
           if(this.endMinutes > this.startMinutes){
             this.worked = this.endMinutes - this.startMinutes;
           }else{
+            this.startMinutes = this.endMinutes;
             this.worked = 0;
           }
+          let startDate = this.worklogService.getDaySelected();
+          startDate.setHours(Math.floor(this.startMinutes / 60));
+          startDate.setMinutes(this.startMinutes % 60);
+          console.log(startDate);
+          let endDate = this.worklogService.getDaySelected();
+          endDate.setHours(Math.floor(this.endMinutes / 60));
+          endDate.setMinutes(this.endMinutes % 60);
+          console.log(endDate);
+
           if(this.task === ""){
             this.task = "793707516865cd044e87ef01";
           }
           this.worklogService.createNewWorklog("project", this.task,
-              this.description,"593707516865cd044e87ef00", this.worked, this.startDate, this.endDate).subscribe(x => {
+              this.description,"593707516865cd044e87ef00", this.worked, startDate, endDate).subscribe(x => {
           });
         }
       }

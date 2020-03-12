@@ -9,6 +9,7 @@ import {Hours} from "../models/hours";
 import * as moment from 'moment';
 import {WeekHours} from "../models/weekHours";
 import {WorklogSend} from "../models/worklogSend";
+import {DayDate} from "../models/dayDate";
 
 @Injectable({
     providedIn: 'root',
@@ -18,6 +19,7 @@ export class WorklogService {
     private worklogUrl: string;
     weekHours: WeekHours;
     monthHour: Hours;
+    worklogSelected: DayDate;
     private weekSelected: number;
     monthSelected: Date;
     daySelected: Date;
@@ -141,5 +143,11 @@ export class WorklogService {
     }
     public setWeekSelected(value: number) {
         this.weekSelected = value;
+    }
+    public setWorklogSelected(dayDate: DayDate){
+        this.worklogSelected = dayDate;
+    }
+    public getWorklogSelected(): DayDate{
+        return  this.worklogSelected;
     }
 }

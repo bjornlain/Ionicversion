@@ -1,0 +1,213 @@
+#topNav{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: space-between;
+    align-items: center;
+    margin:0 1px 0 1px;
+}
+#plusIcon{
+    height:35px;
+    width:35px;
+}
+#row{
+    justify-content: center;
+    align-items: center ;
+    display: flex;
+    flex-direction: row;
+}
+#arrowLeft{
+    margin-right:10px;
+    width:9px;
+    height:9px;
+}
+.boxDay{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    width:100%;
+    background-color: #333A44;
+    height:36px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+.textDay{
+    color:white;
+}
+
+#totalHours{
+    font-size: 10px;
+    font-weight: 300;
+    color:white;
+    margin-right: 3px;
+}
+#rowFlex{
+    margin-right:20px;
+    display: flex;
+    flex-direction: row;
+}
+#project{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+    margin:-15px 20px 0 20px;
+}
+
+#task{
+    display: flex;
+    flex-direction: column;
+    margin-left:20px;
+    margin-top: -8px;
+}
+.taskText{
+    margin-top: -14px;
+}
+.descriptionText{
+    margin-top: -13px;
+}
+#description{
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px 0 20px;
+}
+#timesText{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+#timesHours{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: -25px;
+    margin-left: -12px;
+}
+.mediumText{
+    font-size: 14px;
+    font-weight: 500;
+}
+.regularText{
+    font-size: 12px;
+    font-weight: 400;
+}
+#totalTime{
+    display: flex;
+    margin-left: 25px;
+    flex-direction: column;
+}
+.totalHours{
+    margin-top:-15px;
+}
+
+worrklogdetails module
+#topNav{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: space-between;
+    align-items: center;
+    margin:0 1px 0 1px;
+}
+#plusIcon{
+    height:35px;
+    width:35px;
+}
+#row{
+    justify-content: center;
+    align-items: center ;
+    display: flex;
+    flex-direction: row;
+}
+#arrowLeft{
+    margin-right:10px;
+    width:9px;
+    height:9px;
+}
+.boxDay{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    width:100%;
+    background-color: #333A44;
+    height:36px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+.textDay{
+    color:white;
+}
+
+#totalHours{
+    font-size: 10px;
+    font-weight: 300;
+    color:white;
+    margin-right: 3px;
+}
+#rowFlex{
+    margin-right:20px;
+    display: flex;
+    flex-direction: row;
+}
+#project{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+    margin:-15px 20px 0 20px;
+}
+
+#task{
+    display: flex;
+    flex-direction: column;
+    margin-left:20px;
+    margin-top: -8px;
+}
+.taskText{
+    margin-top: -14px;
+}
+.descriptionText{
+    margin-top: -13px;
+}
+#description{
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px 0 20px;
+}
+#timesText{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+#timesHours{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: -25px;
+    margin-left: -12px;
+}
+.mediumText{
+    font-size: 14px;
+    font-weight: 600;
+}
+.regularText{
+    font-size: 12px;
+    font-weight: 400;
+}
+#totalTime{
+    display: flex;
+    margin-left: 25px;
+    flex-direction: column;
+}
+.totalHours{
+    margin-top:-15px;
+}
+
