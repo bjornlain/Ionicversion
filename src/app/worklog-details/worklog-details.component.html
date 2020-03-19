@@ -20,7 +20,7 @@
   </div>
   <div id="project">
     <p class="mediumText">Sed ut perspiciatis.</p>
-    <img (click)="editWorklog()" class="dotImage" src="../../assets/Edit%20Hours-black.svg">
+    <img (click)="goToUpdate()" class="dotImage" src="../../assets/Edit%20Hours-black.svg">
   </div>
   <div id="task">
     <p class="mediumText">Project/task</p>
@@ -44,4 +44,5 @@
     <p class="mediumText">Total time spend</p>
     <p class="regularText totalHours">{{timeSpendHours.hours | add08}}:{{timeSpendHours.minutes | add08}}:00</p>
   </div>
+  <input type="button" (click)="deleteWorklog()" value="delete worklog">
 </ion-content>

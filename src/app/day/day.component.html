@@ -25,7 +25,7 @@
       </div>
       <div class="dots">
         <p class="hours">{{task.hours.hours | add04}}:{{task.hours.minutes | add04}}:00</p>
-        <img  class="dotImage" src="../../assets/Edit%20Hours-black.svg">
+        <img (click)="goToUpdate(task)" class="dotImage" src="../../assets/Edit%20Hours-black.svg">
       </div>
     </div>
 

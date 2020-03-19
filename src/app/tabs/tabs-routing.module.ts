@@ -109,6 +109,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'update-worklog',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+                import('../update-worklog/update-worklog.module').then(m => m.UpdateWorklogModule)
+          }
+        ]
+      },
+      {
         path: 'settings',
         children: [
           {
@@ -127,7 +137,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/worklog-details',
+    redirectTo: '/tabs/update-worklog',
     pathMatch: 'full'
   }
 ];

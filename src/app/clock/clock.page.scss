@@ -44,17 +44,19 @@ ion-content ion-toolbar {
 #workBreak{
   display:flex;
   flex-direction:row;
+  justify-content: space-around;
 }
 #work{
   display: flex;
   flex-direction: column;
-  width:50%;
   align-items: center;
 }
 #break{
   display: flex;
   flex-direction: column;
-  width:50%;
+  align-items: center;
+}
+#task{
   align-items: center;
 }
 .text{

@@ -18,7 +18,7 @@ export class NewScheduleComponent implements OnInit {
 
   ngOnInit() {
    this.day = this.route.snapshot.paramMap.get('day');
-   this.schedule = new WeekSchedule(this.day , new Hours(8 , 0 , 0), new Hours(1 , 0 , 0));
+   this.schedule = new WeekSchedule(this.day , new Hours(8 , 0 , 0), new Hours(0 , 30 , 0));
   }
   goBackSchedule() {
     this.router.navigate(['/tabs/schedule']);

@@ -3,10 +3,10 @@ import {WorklogService} from '../services/worklog.service';
 import {Hours} from '../models/hours';
 import {timer} from 'rxjs';
 import {Router} from '@angular/router';
-import {Token} from "../models/token";
-import {AuthService} from "../services/auth.service";
-import {take} from "rxjs/operators";
-import {Worklog} from "../models/worklog";
+import {Token} from '../models/token';
+import {AuthService} from '../services/auth.service';
+import {take} from 'rxjs/operators';
+import {Worklog} from '../models/worklog';
 import * as moment from 'moment';
 
 @Component({
@@ -16,8 +16,8 @@ import * as moment from 'moment';
 })
 export class ClockPage {
   myDate: number;
-  clockedIn: boolean = false;
-  pauseIn: boolean = false;
+  clockedIn = false;
+  pauseIn = false;
   today: Date;
   monthArray: Worklog[] = [];
   weekHours: Hours;
@@ -42,36 +42,39 @@ export class ClockPage {
     this.todayDate = new Date();
     this.getWeekAndMonthHours();
   }
-  getWeekAndMonthHours(){
-    let firstDayOfMonth = moment().startOf("month").toDate();
-    let lastDayOfMonth = moment().endOf("month").toDate();
-    this.authService.token.subscribe(x => { if(x)
+  getWeekAndMonthHours() {
+    const firstDayOfMonth = moment().startOf('month').toDate();
+    const lastDayOfMonth = moment().endOf('month').toDate();
+    this.authService.token.subscribe(x => { if (x) {
     this.worklogService.getWorkedHours(this.todayDate.getFullYear(), this.todayDate.getMonth(),
         firstDayOfMonth.getDate(), lastDayOfMonth.getDate()).subscribe( x => {
       this.worklogsMonth = x as Worklog[];
       console.log(this.worklogsMonth);
       let monthMinutes = 0;
-      for(let day of this.worklogsMonth){
+      for (const day of this.worklogsMonth) {
         monthMinutes += day.worked;
       }
       this.monthHours = this.worklogService.convertMinutesToHours(monthMinutes);
+      if (this.monthHours.minutes === 60 ) { this.monthHours.minutes = 0; }
       if (this.monthHours.minutes > 0 ) {
         this.monthHoursLeft = new Hours(160 - this.monthHours.hours - 1, 60 - this.monthHours.minutes, 0);
       } else {
         this.monthHoursLeft = new Hours(160 - this.monthHours.hours, 60 - this.monthHours.minutes, 0);
       }
     });
-      const firstDayOfWeek = moment().startOf("week").toDate();
-      const lastDayOfWeek = moment().endOf("week").toDate();
-      this.worklogService.getWorkedHours(this.todayDate.getFullYear(), this.todayDate.getMonth(),
+ }
+                                            const firstDayOfWeek = moment().startOf('week').toDate();
+                                            const lastDayOfWeek = moment().endOf('week').toDate();
+                                            this.worklogService.getWorkedHours(this.todayDate.getFullYear(), this.todayDate.getMonth(),
           firstDayOfWeek.getDate(), lastDayOfWeek.getDate()).subscribe( x => {
         this.worklogsWeek = x as Worklog[];
         console.log(this.worklogsWeek);
         let weekMinutes = 0;
-        for(let day of this.worklogsWeek){
+        for (const day of this.worklogsWeek) {
           weekMinutes += day.worked;
         }
         this.weekHours = this.worklogService.convertMinutesToHours(weekMinutes);
+        if (this.weekHours.minutes === 60 ) { this.weekHours.minutes = 0; }
         if (this.weekHours.minutes > 0) {
           this.weekHoursLeft = new Hours( 40 - this.weekHours.hours - 1, 60 - this.weekHours.minutes, 0);
         } else {
@@ -79,6 +82,9 @@ export class ClockPage {
         }
       });
   });
+  }
+  goCreateWorklogDate(){
+      this.router.navigate(['/tabs/createWorklogDate']);
   }
   clockIn() {
     this.clockedIn = !this.clockedIn;

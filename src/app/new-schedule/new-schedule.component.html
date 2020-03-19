@@ -29,11 +29,11 @@
   <div id="hourSet">
     <ion-item>
       <ion-label>Set Coding Hours</ion-label>
-      <ion-datetime  (ionChange)="updateCodingHours(codingHours.value)" #codingHours display-format="h:mm " picker-format="h:mm " value="1990-02-19T07:00Z"></ion-datetime>
+      <ion-datetime  (ionChange)="updateCodingHours(codingHours.value)" #codingHours display-format="HH:mm " picker-format="HH:mm " value="2020-02-19T08:00"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Set Social Breaks</ion-label>
-      <ion-datetime (ionChange)="updateSocialHours(breakHours.value)" #breakHours display-format="h:mm " picker-format="h:mm " value="1990-02-19T00:00Z"></ion-datetime>
+      <ion-datetime (ionChange)="updateSocialHours(breakHours.value)" #breakHours display-format="HH:mm " picker-format="HH:mm" value="2020-02-19T00:30"></ion-datetime>
     </ion-item>
   </div>
   <div (click)="saveSchedule()" id="schedule">

@@ -20,6 +20,10 @@
                 <p class="text">WORK</p>
                 <p class="time">{{timeWorking.hours |add0}}:{{timeWorking.minutes | add0}}</p>
             </div>
+            <div id="task">
+                <img (click)="goCreateWorklogDate()" src="../../assets/taskPlus.png">
+                <p class="text">TASK</p>
+            </div>
             <div id="break">
                 <img src="../../assets/BreakWithCircle.svg">
                 <p class="text">BREAK</p>

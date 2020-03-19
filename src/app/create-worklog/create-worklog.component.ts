@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {WorklogService} from "../services/worklog.service";
-import {AuthService} from "../services/auth.service";
-import {Hours} from "../models/hours";
+import {Router} from '@angular/router';
+import {WorklogService} from '../services/worklog.service';
+import {AuthService} from '../services/auth.service';
+import {Hours} from '../models/hours';
 
 @Component({
   selector: 'app-create-worklog',
@@ -10,14 +10,14 @@ import {Hours} from "../models/hours";
   styleUrls: ['./create-worklog.component.scss'],
 })
 export class CreateWorklogComponent implements OnInit {
-  startMinutes: number = 540;
+  startMinutes = 540;
   startDate: Date = new Date();
   endDate: Date = new Date();
-  endMinutes: number = 720;
+  endMinutes = 1020;
   worked: number;
-  description: string = "";
-  task: string = "";
-  constructor(private router: Router, private worklogService: WorklogService,private authService: AuthService) {
+  description = '';
+  task = '';
+  constructor(private router: Router, private worklogService: WorklogService, private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -47,28 +47,28 @@ export class CreateWorklogComponent implements OnInit {
     this.authService.token.subscribe(x => {
       if (x) {
         if (x.access_token != null) {
-          console.log(this.startMinutes + " " + this.endMinutes);
+          console.log(this.startMinutes + ' ' + this.endMinutes);
           console.log(this.endMinutes > this.startMinutes);
-          if(this.endMinutes > this.startMinutes){
+          if (this.endMinutes > this.startMinutes) {
             this.worked = this.endMinutes - this.startMinutes;
-          }else{
+          } else {
             this.startMinutes = this.endMinutes;
             this.worked = 0;
           }
-          let startDate = this.worklogService.getDaySelected();
+          const startDate = new Date(this.worklogService.getDaySelected());
           startDate.setHours(Math.floor(this.startMinutes / 60));
           startDate.setMinutes(this.startMinutes % 60);
           console.log(startDate);
-          let endDate = this.worklogService.getDaySelected();
+          const endDate = new Date(this.worklogService.getDaySelected());
           endDate.setHours(Math.floor(this.endMinutes / 60));
           endDate.setMinutes(this.endMinutes % 60);
           console.log(endDate);
 
-          if(this.task === ""){
-            this.task = "793707516865cd044e87ef01";
+          if (this.task === '') {
+            this.task = '5cc5a0218e552b09f484d888';
           }
-          this.worklogService.createNewWorklog("project", this.task,
-              this.description,"593707516865cd044e87ef00", this.worked, startDate, endDate).subscribe(x => {
+          this.worklogService.createNewWorklog('project', this.task,
+              this.description, '593707516865cd044e87ef00', this.worked, startDate, endDate).subscribe(x => {
           });
         }
       }

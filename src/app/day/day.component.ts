@@ -48,6 +48,10 @@ export class DayComponent implements OnInit {
     this.worklogService.setWorklogSelected(worklog);
     this.router.navigate(['/tabs/worklog-details']);
   }
+  goToUpdate(worklog: DayDate){
+    this.worklogService.setWorklogSelected(worklog);
+    this.router.navigate(['/tabs/update-worklog']);
+  }
   getWorklogsDay(){
     this.authService.token.subscribe(x => { if(x)
       if(x.access_token != null){
@@ -67,13 +71,17 @@ export class DayComponent implements OnInit {
                   let startDate = new Date(day.startDate);
                   let endDate = new Date(day.endDate);
                   let date = new Date(yearSelected, monthSelected, this.daySelected.getDate());
-                  this.dayWorklogs[this.counter] = new DayDate(day.id, new Hours(hours, minutes, 0), this.daySelected.getDate() ,
+                  this.dayWorklogs[this.counter] = new DayDate(day._id, new Hours(hours, minutes, 0), this.daySelected.getDate() ,
                       startDate, endDate, day.description , day.task);
                   this.counter++;
                 }
                 const hours = Math.floor(dayMinutes/ 60);
                 const minutes = dayMinutes % 60;
                 this.dayHours = new Hours(hours, minutes, 0);
+                this.worklogService.setDayHours(this.dayHours);
+              } else{
+                this.dayHours = new Hours(0, 0, 0);
+                this.worklogService.setDayHours(this.dayHours);
               }
               if(this.counter === this.worklogsDay.length && this.worklogsDay.length > 0){
                 console.log(this.dayWorklogs);

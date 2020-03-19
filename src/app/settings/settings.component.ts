@@ -8,10 +8,10 @@ import {Router} from '@angular/router';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {}
-  logOut(){
+  logOut() {
     this.router.navigate(['/login']);
   }
 }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Token} from "../models/token";
-import {BehaviorSubject, Observable} from "rxjs";
-import {Worklog} from "../models/worklog";
+import {Token} from '../models/token';
+import {BehaviorSubject} from 'rxjs';
+
 
 
 @Injectable({
@@ -11,12 +11,12 @@ import {Worklog} from "../models/worklog";
 export class AuthService {
     private authUrl: string;
     private admin = JSON.stringify({
-        email: "bart@codious.io",
-        password: "test1234"
+        email: 'bart@codious.io',
+        password: 'test1234'
     });
     options = {headers: {'Content-Type': 'application/json'}};
-    public token : BehaviorSubject<Token | undefined> = new BehaviorSubject(undefined);
-    private access_token : string = undefined;
+    public token: BehaviorSubject<Token | undefined> = new BehaviorSubject(undefined);
+    private access_token: string = undefined;
     constructor(private http: HttpClient) {
         this.authUrl = 'http://localhost:4100/api/v1/auth.login';
         this.login().then(x => {

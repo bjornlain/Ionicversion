@@ -1,0 +1,59 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-item>
+      <div id="topNav">
+        <div id="row">
+          <img id="arrowLeft" src="../../assets/ArrowLeft.png">
+          <p (click)="goBack()" class="mediumText">{{dayString2}}</p>
+        </div>
+        <ion-icon id="plusIcon" name="add-circle"></ion-icon>
+      </div>
+    </ion-item>
+  </ion-header>
+  <div id="cancelDiv">
+    <p (click)="goBackToDay()" id="cancel">Cancel</p>
+  </div>
+  <div class="boxDay">
+    <p class="textDay regularText">{{dayString}} - EDIT</p>
+    <div id="rowFlex">
+      <p id="totalHours">{{dayHours.hours }}:{{dayHours.minutes }}:00</p>
+      <img src="../../assets/Work_GladiatorEquip_White.svg">
+    </div>
+  </div>
+  <ion-select [(ngModel)]="project" class="project" interface="popover">
+    <ion-select-option  ngDefaultControl value="Project">Project</ion-select-option>
+  </ion-select>
+  <p class="required">*Select a project</p>
+  <p class="title">Project/task</p>
+  <ion-select class="project" ngDefaultControl  [(ngModel)]="task" interface="popover">
+    <ion-select-option value="5cc5a0218e552b09f484d888">5cc5a0218e552b09f484d888</ion-select-option>
+  </ion-select>
+  <p class="required">*Insert a title of the task / choose a task</p>
+  <p class="title">Description</p>
+  <ion-textarea [(ngModel)]="description" id="description"></ion-textarea>
+  <p class="required">*Make a brief description of the task</p>
+  <p class="title">Date</p>
+  <div id="datePicker">
+    <ion-select class="select" placeholder="Day"  ngDefaultControl [(ngModel)]="daySelected" interface="popover">
+      <ion-select-option  *ngFor="let day of dayArray" value="{{day}}">{{day}}</ion-select-option>
+    </ion-select>
+    <ion-select  class="select" placeholder="Mon." ngDefaultControl [(ngModel)]="monthSelected" interface="popover">
+      <ion-select-option *ngFor="let month of monthArray" value="{{month}}">{{month}}</ion-select-option>
+    </ion-select>
+    <ion-select  class="select" placeholder="Year" ngDefaultControl [(ngModel)]="yearSelected" interface="popover">
+      <ion-select-option *ngFor="let year of yearArray" value="{{year}}">{{year}}</ion-select-option>
+    </ion-select>
+  </div>
+  <div class="startEnd">
+    <p class="start">Start-time</p>
+    <p class="end">End-time</p>
+  </div>
+  <div id="pickers">
+    <ion-datetime [(ngModel)]="startHours" (ionChange)="updateStartingHours(startHours)"  id="startTimePicker" display-format="HH:mm" picker-format="HH:mm"></ion-datetime>
+    <ion-datetime [(ngModel)]="endHours" (ionChange)="updateEndingHours(endHours)"  id="endTimePicker" display-format="HH:mm" picker-format="HH:mm"></ion-datetime>
+  </div>
+  <div (click)="saveTask()" id="schedule">
+    <p id="scheduleText">SAVE NEW ENTRY</p>
+    <img src="../../assets/save.svg">
+  </div>
+</ion-content>

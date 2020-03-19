@@ -12,7 +12,7 @@
   <p class="required">*Select a project</p>
   <p class="title">Project/task</p>
   <ion-select class="project"  [(ngModel)]="task" interface="popover">
-    <ion-select-option value="793707516865cd044e87ef01">793707516865cd044e87ef01</ion-select-option>
+    <ion-select-option value="5cc5a0218e552b09f484d888">5cc5a0218e552b09f484d888</ion-select-option>
   </ion-select>
   <p class="required">*Insert a title of the task / choose a task</p>
   <p class="title">Description</p>
@@ -24,7 +24,7 @@
   </div>
   <div id="pickers">
     <ion-datetime (ionChange)="updateStartingHours(startHours.value)" #startHours id="startTimePicker" display-format="HH:mm" picker-format="HH:mm" value="2020-03-10T08:00Z"></ion-datetime>
-    <ion-datetime (ionChange)="updateEndingHours(endHours.value)" #endHours id="endTimePicker" display-format="HH:mm" picker-format="HH:mm" value="2020-03-10T11:00Z"></ion-datetime>
+    <ion-datetime (ionChange)="updateEndingHours(endHours.value)" #endHours id="endTimePicker" display-format="HH:mm" picker-format="HH:mm" value="2020-03-10T16:00Z"></ion-datetime>
   </div>
   <div (click)="saveTask()" id="schedule">
     <p id="scheduleText">SAVE NEW ENTRY</p>

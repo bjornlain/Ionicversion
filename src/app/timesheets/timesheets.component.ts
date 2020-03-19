@@ -58,7 +58,7 @@ export class TimesheetsComponent implements OnInit {
     this.selectedDevice = newValue;
     this.monthToday = newValue;
     console.log(this.monthNames.indexOf(this.monthToday));
-    this.weeksOfMonth = this.worklogService.getWeeksInMonth(this.monthNames.indexOf(this.monthToday),this.todayDate.getFullYear());
+    this.weeksOfMonth = this.worklogService.getWeeksInMonth(this.monthNames.indexOf(this.monthToday), this.todayDate.getFullYear());
     console.log(this.weeksOfMonth);
     this.getMonthHours(this.weeksOfMonth);
    /* this.weekHoursMonth = this.worklogService.calculateWeekHoursperMonth(this.monthToday , this.yearToday);
@@ -68,8 +68,8 @@ export class TimesheetsComponent implements OnInit {
     this.averageHoursDay = new Hours(Math.floor(this.minutesPerDay / 60) , Math.round(this.minutesPerDay % 60) , 0); */
   }
   getMonthHours(weeksOfMonth) {
-    let month = this.monthNames.indexOf(this.selectedDevice);
-    let date = moment([this.todayDate.getFullYear(), month]);
+    const month = this.monthNames.indexOf(this.selectedDevice);
+    const date = moment([this.todayDate.getFullYear(), month]);
     const firstDayOfMonth = moment(date).startOf('month').toDate();
     const lastDayOfMonth = moment(date).endOf('month').toDate();
     this.i = 0;
@@ -114,7 +114,7 @@ export class TimesheetsComponent implements OnInit {
               weekMinutes += day.worked;
             }
             console.log(weekMinutes);
-            if(this.worklogsWeek.length !== 0){
+            if (this.worklogsWeek.length !== 0) {
               const weekNumber = moment(this.worklogsWeek[0].startDate).week();
               const hours = Math.floor(weekMinutes / 60);
               const minutes = weekMinutes % 60;
@@ -134,7 +134,7 @@ export class TimesheetsComponent implements OnInit {
                 this.weekHoursMonthTemp.shift();
                 this.weekHoursMonthTemp.sort((a, b) => a.weekNumber - b.weekNumber);
                 let j = 0;
-                for(let week of this.weeksOfMonth){
+                for (const week of this.weeksOfMonth) {
                   this.weekHoursMonthTemp[j].startDay = week.start;
                   this.weekHoursMonthTemp[j].endDay = week.end;
                   j++;
@@ -143,13 +143,13 @@ export class TimesheetsComponent implements OnInit {
                 this.weekHoursMonth = this.weekHoursMonthTemp;
                 this.allDataReceived = true;
               }
-            }else{
-              console.log(this.weeksOfMonth[this.i-1]);
+            } else {
+              console.log(this.weeksOfMonth[this.i - 1]);
               console.log(this.monthNames.indexOf(this.monthToday));
-              let date = new Date(2020, this.monthNames.indexOf(this.monthToday),this.weeksOfMonth[this.i-1].start);
+              const date = new Date(2020, this.monthNames.indexOf(this.monthToday), this.weeksOfMonth[this.i - 1].start);
               console.log(date);
               const weekNumber = moment(date).week();
-              this.weekHoursMonthTemp[this.i] = new WeekHours( weekNumber, new Hours(0,0,0), this.weeksOfMonth[this.i - 1].start, this.weeksOfMonth[this.i - 1].end);
+              this.weekHoursMonthTemp[this.i] = new WeekHours( weekNumber, new Hours(0, 0, 0), this.weeksOfMonth[this.i - 1].start, this.weeksOfMonth[this.i - 1].end);
               if (this.i === this.weeksOfMonth.length) {
                 console.log(this.worklogsWeek);
                 this.monthSelected = new Date(date);
@@ -158,7 +158,7 @@ export class TimesheetsComponent implements OnInit {
                 this.weekHoursMonthTemp.shift();
                 this.weekHoursMonthTemp.sort((a, b) => a.weekNumber - b.weekNumber);
                 let j = 0;
-                for(let week of this.weeksOfMonth){
+                for (const week of this.weeksOfMonth) {
                   this.weekHoursMonthTemp[j].startDay = week.start;
                   this.weekHoursMonthTemp[j].endDay = week.end;
                   j++;
