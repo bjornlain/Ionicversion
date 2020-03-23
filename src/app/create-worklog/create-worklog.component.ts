@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {WorklogService} from '../services/worklog.service';
 import {AuthService} from '../services/auth.service';
-import {Hours} from '../models/hours';
+import {Hour} from '../models/hour';
 
 @Component({
   selector: 'app-create-worklog',

@@ -38,7 +38,7 @@
     <div  *ngFor="let week of weekHoursMonth" (click)="goToWeek(week)" class="box">
       <div class="columnFlex">
         <p class="textBox">Week {{week.weekNumber}}</p>
-        <p class="hours">Hours {{week.hours.hours | add03}}:{{week.hours.minutes | add03}}:00</p>
+        <p class="hours">Hours {{week.Hour.hours | add03}}:{{week.Hour.minutes | add03}}:00</p>
       </div>
       <div id="rowFlex">
         <img class="monitor" src="../../assets/monitor.svg">

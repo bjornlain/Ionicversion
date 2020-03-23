@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IonDatetime} from "@ionic/angular";
 import {WeekSchedule} from "../models/week-schedule";
-import {Hours} from "../models/hours";
+import {Hour} from "../models/hour";
 
 @Component({
   selector: 'app-new-schedule',
@@ -18,7 +18,7 @@ export class NewScheduleComponent implements OnInit {
 
   ngOnInit() {
    this.day = this.route.snapshot.paramMap.get('day');
-   this.schedule = new WeekSchedule(this.day , new Hours(8 , 0 , 0), new Hours(0 , 30 , 0));
+   this.schedule = new WeekSchedule(this.day , new Hour(8 , 0 , 0), new Hour(0 , 30 , 0));
   }
   goBackSchedule() {
     this.router.navigate(['/tabs/schedule']);
@@ -28,11 +28,11 @@ export class NewScheduleComponent implements OnInit {
     , this.schedule.socialHours.hours , this.schedule.socialHours.minutes]);
   }
   updateCodingHours($event) {
-    this.schedule.codingHours = new Hours((+$event.substr(11, 2)), (+$event.substr(14, 2)), 0);
+    this.schedule.codingHours = new Hour((+$event.substr(11, 2)), (+$event.substr(14, 2)), 0);
     console.log(this.schedule);
   }
   updateSocialHours($event) {
-    this.schedule.socialHours = new Hours((+$event.substr(11, 2)), (+$event.substr(14, 2)), 0);
+    this.schedule.socialHours = new Hour((+$event.substr(11, 2)), (+$event.substr(14, 2)), 0);
     console.log(this.schedule);
   }
 }

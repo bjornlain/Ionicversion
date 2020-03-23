@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {Hours} from '../models/hours';
+import {Hour} from '../models/hour';
 import {WeekHours} from '../models/weekHours';
 import {Worklog} from '../models/worklog';
 import {AuthService} from '../services/auth.service';
@@ -19,14 +19,14 @@ export class TimesheetsComponent implements OnInit {
   yearToday: number;
   allDataReceived = false;
   monthToday: string;
-  monthHours: Hours;
-  weekHours: Hours;
+  monthHours: Hour;
+  weekHours: Hour;
   monthHoursReceived = false;
   daysWorked: number;
   minutesPerDay: number;
   worklogsMonth: Worklog[] = [];
   worklogsWeek: Worklog[] = [];
-  averageHoursDay: Hours;
+  averageHoursDay: Hour;
   todayDate: Date;
   monthSelected: Date;
   i: number;
@@ -39,7 +39,10 @@ export class TimesheetsComponent implements OnInit {
   ngOnInit() {
     this.todayDate = new Date();
     this.yearToday = this.todayDate.getUTCFullYear();
+    this.worklogService.setMonthSelected(this.todayDate);
+    console.log(this.worklogService.getMonthSelected());
     this.selectedDevice = this.monthNames[this.todayDate.getMonth()];
+    this.monthToday = this.selectedDevice;
     this.i = 0;
     this.weeksOfMonth = this.worklogService.getWeeksInMonth(this.todayDate.getMonth(), this.todayDate.getFullYear());
     console.log(this.weeksOfMonth);
@@ -52,6 +55,8 @@ export class TimesheetsComponent implements OnInit {
   }
   goToWeek(week: WeekHours) {
     this.worklogService.setWeekHours(week);
+    let monthDate = new Date(2020, this.monthNames.indexOf(this.monthToday) , 1);
+    this.worklogService.setMonthSelected(monthDate);
     this.router.navigate(['/tabs/week']);
   }
   onChange(newValue) {
@@ -101,12 +106,14 @@ export class TimesheetsComponent implements OnInit {
           this.monthHours = this.worklogService.convertMinutesToHours(monthMinutes);
           this.monthHoursReceived = true;
         });
-        for (const week of weeksOfMonth) {
-          const firstDayOfWeek = new Date(this.todayDate.getFullYear(), this.monthNames.indexOf(this.selectedDevice), week.start);
-          const lastDayOfWeek = new Date(this.todayDate.getFullYear(), this.monthNames.indexOf(this.selectedDevice), week.end);
-          this.worklogService.getWorkedHours(this.todayDate.getFullYear(), this.monthNames.indexOf(this.selectedDevice),
-              firstDayOfWeek.getDate(), lastDayOfWeek.getDate()).subscribe( x => {
-            this.i++;
+        this.worklogService.getWorkedHoursWeek(this.todayDate.getFullYear(), this.monthNames.indexOf(this.selectedDevice)).subscribe( x => {
+
+          this.weekHoursMonth = x as WeekHours[];
+          if(x.length !== 0){
+            console.log(x);
+            this.allDataReceived = true;
+          }
+          /* this.i++;
             this.worklogsWeek = x as Worklog[];
             console.log(this.worklogsWeek);
             let weekMinutes = 0;
@@ -167,11 +174,10 @@ export class TimesheetsComponent implements OnInit {
                 this.allDataReceived = true;
               }
             }
-
+*/
           });
       }
       }
- }
     });
   }
 }

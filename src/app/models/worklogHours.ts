@@ -1,10 +1,10 @@
 import {Worklog} from "./worklog";
-import {Hours} from "./hours";
+import {Hour} from "./hour";
 
 export class WorklogHours{
     worklog: Worklog;
-    hours: Hours;
-    constructor(worklog: Worklog, hours: Hours) {
+    hours: Hour;
+    constructor(worklog: Worklog, hours: Hour) {
         this.worklog = worklog;
         this.hours = hours;
     }

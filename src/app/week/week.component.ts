@@ -5,7 +5,7 @@ import {WorklogService} from '../services/worklog.service';
 import {WeekDate} from '../models/WeekDate';
 import {Worklog} from '../models/worklog';
 import * as moment from '../timesheets/timesheets.component';
-import {Hours} from '../models/hours';
+import {Hour} from '../models/hour';
 import {AuthService} from '../services/auth.service';
 
 
@@ -20,7 +20,7 @@ export class WeekComponent implements OnInit {
   monthString: string;
   allDataReceived = false;
   counter = 0;
-  hours: Hours;
+  hours: Hour;
   monthNames: string[] = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'];
   weekNames: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -32,6 +32,7 @@ export class WeekComponent implements OnInit {
     this.weekDates = [];
     this.weekHours = this.worklogService.getWeekHours();
     this.monthSelected = this.worklogService.getMonthSelected();
+    console.log(this.worklogService.getMonthSelected());
     this.monthString = this.monthNames[this.monthSelected.getMonth()];
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
@@ -74,7 +75,7 @@ export class WeekComponent implements OnInit {
               const minutes = dayMinutes % 60;
               console.log(this.counter - 1);
               this.weekDates[this.counter - 1] = new WeekDate(null, null, null);
-              this.hours = new Hours(hours, minutes, 0);
+              this.hours = new Hour(hours, minutes, 0);
               this.weekDates[this.counter - 1].hours = this.hours;
               const date = new Date(this.workLogsDay[0].startDate);
               console.log(date);
@@ -86,7 +87,7 @@ export class WeekComponent implements OnInit {
                   + ' ' + this.monthNames[date.getMonth()];
             } else {
               const date2 = new Date(this.monthSelected.getFullYear(), this.monthSelected.getMonth(), i);
-              this.weekDates[this.counter - 1] = new WeekDate(new Hours(0, 0, 0), this.weekNames[date2.getDay()]
+              this.weekDates[this.counter - 1] = new WeekDate(new Hour(0, 0, 0), this.weekNames[date2.getDay()]
                   + '. ' +  i + ' ' + this.monthNames[this.monthSelected.getMonth()], date2);
             }
             if (this.counter === (this.weekHours.endDay - this.weekHours.startDay + 1)) {

@@ -1,10 +1,10 @@
-import {Hours} from './hours';
+import {Hour} from './hour';
 
 export class WeekSchedule{
     day: string;
-    codingHours: Hours;
-    socialHours: Hours;
-    constructor(day: string, codingHours: Hours, socialHours: Hours) {
+    codingHours: Hour;
+    socialHours: Hour;
+    constructor(day: string, codingHours: Hour, socialHours: Hour) {
         this.day = day;
         this.codingHours = codingHours;
         this.socialHours = socialHours;

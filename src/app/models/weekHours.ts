@@ -1,14 +1,16 @@
-import {Hours} from "./hours";
+import {Hour} from "./hour";
 
 export class WeekHours{
-    hours: Hours;
+    _id: string;
+    Hour: Hour;
     weekNumber: number;
     startDay: number;
     endDay: number;
-    constructor(weekNumber: number, hours: Hours, startDay: number, endDay: number) {
-        this.hours = hours;
+    constructor(_id: string, weekNumber: number, Hour: Hour, startDay: number, endDay: number) {
+        this.Hour = Hour;
         this.weekNumber = weekNumber;
         this.startDay = startDay;
         this.endDay = endDay;
+        this._id = _id;
     }
 }

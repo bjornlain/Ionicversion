@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Worklog} from "../models/worklog";
 import {NavigationEnd, Router} from "@angular/router";
-import {Hours} from "../models/hours";
+import {Hour} from "../models/hour";
 import {WorklogHours} from "../models/worklogHours";
 import {WorklogService} from "../services/worklog.service";
 import {WeekDate} from "../models/WeekDate";
@@ -24,7 +24,7 @@ export class DayComponent implements OnInit {
     'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
   weekNames: string[] = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   worklogsDay: Worklog[] = [];
-  dayHours = new Hours(0, 0, 0);
+  dayHours = new Hour(0, 0, 0);
   worklogHoursArray: WorklogHours[] = [];
   constructor(private router: Router, private worklogService: WorklogService, private authService: AuthService) { }
 
@@ -71,16 +71,16 @@ export class DayComponent implements OnInit {
                   let startDate = new Date(day.startDate);
                   let endDate = new Date(day.endDate);
                   let date = new Date(yearSelected, monthSelected, this.daySelected.getDate());
-                  this.dayWorklogs[this.counter] = new DayDate(day._id, new Hours(hours, minutes, 0), this.daySelected.getDate() ,
+                  this.dayWorklogs[this.counter] = new DayDate(day._id, new Hour(hours, minutes, 0), this.daySelected.getDate() ,
                       startDate, endDate, day.description , day.task);
                   this.counter++;
                 }
                 const hours = Math.floor(dayMinutes/ 60);
                 const minutes = dayMinutes % 60;
-                this.dayHours = new Hours(hours, minutes, 0);
+                this.dayHours = new Hour(hours, minutes, 0);
                 this.worklogService.setDayHours(this.dayHours);
               } else{
-                this.dayHours = new Hours(0, 0, 0);
+                this.dayHours = new Hour(0, 0, 0);
                 this.worklogService.setDayHours(this.dayHours);
               }
               if(this.counter === this.worklogsDay.length && this.worklogsDay.length > 0){

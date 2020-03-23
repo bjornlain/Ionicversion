@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {WorklogService} from '../services/worklog.service';
-import {Hours} from '../models/hours';
+import {Hour} from '../models/hour';
 import {AuthService} from '../services/auth.service';
 import {DayDate} from '../models/dayDate';
 
@@ -16,14 +16,14 @@ export class WorklogDetailsComponent implements OnInit {
   taskTitle: string;
   taskDescription: string;
   worklogSelected: DayDate;
-  todayHours: Hours;
-  startHours: Hours;
-  timeSpendHours: Hours;
-  endHours: Hours;
+  todayHours: Hour;
+  startHours: Hour;
+  timeSpendHours: Hour;
+  endHours: Hour;
   monthNames: string[] = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE',
     'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
   weekNames: string[] = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-  dayHours: Hours = new Hours(0, 0, 0);
+  dayHours: Hour = new Hour(0, 0, 0);
   dayString: string;
 
   constructor(private router: Router, private worklogService: WorklogService, private authService: AuthService) {
@@ -36,28 +36,28 @@ export class WorklogDetailsComponent implements OnInit {
     this.taskTitle = this.worklogSelected.task.key;
     const startDate = new Date(this.worklogSelected.startDate);
     const endDate = new Date(this.worklogSelected.endDate);
-    this.startHours = new Hours(startDate.getHours(), startDate.getMinutes(), 0);
-    this.endHours = new Hours(endDate.getHours(), endDate.getMinutes(), 0);
+    this.startHours = new Hour(startDate.getHours(), startDate.getMinutes(), 0);
+    this.endHours = new Hour(endDate.getHours(), endDate.getMinutes(), 0);
     this.dayHours = this.worklogService.getWorklogSelected().hours;
     const timeSpend = (this.endHours.hours * 60 + this.endHours.minutes) - (this.startHours.hours * 60 + this.startHours.minutes);
-    this.timeSpendHours = new Hours(Math.floor(timeSpend / 60), (timeSpend % 60), 0);
-    this.todayHours = new Hours(new Date().getHours(), new Date().getMinutes(), 0);
+    this.timeSpendHours = new Hour(Math.floor(timeSpend / 60), (timeSpend % 60), 0);
+    this.todayHours = new Hour(new Date().getHours(), new Date().getMinutes(), 0);
     console.log(this.worklogSelected);
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
         const startDate = new Date(this.worklogSelected.startDate);
         const endDate = new Date(this.worklogSelected.endDate);
         this.dayHours = this.worklogService.getWorklogSelected().hours;
-        this.startHours = new Hours(startDate.getHours(), startDate.getMinutes(), 0);
-        this.endHours = new Hours(endDate.getHours(), endDate.getMinutes(), 0);
-        this.todayHours = new Hours(new Date().getHours(), new Date().getMinutes(), 0);
+        this.startHours = new Hour(startDate.getHours(), startDate.getMinutes(), 0);
+        this.endHours = new Hour(endDate.getHours(), endDate.getMinutes(), 0);
+        this.todayHours = new Hour(new Date().getHours(), new Date().getMinutes(), 0);
         this.weekSelected = this.worklogService.getWeekSelected();
         this.worklogSelected = this.worklogService.getWorklogSelected();
         this.taskTitle = this.worklogSelected.task.key;
         this.taskDescription = this.worklogSelected.description;
         this.daySelected = this.worklogService.getDaySelected();
         const timeSpend = (this.endHours.hours * 60 + this.endHours.minutes) - (this.startHours.hours * 60 + this.startHours.minutes);
-        this.timeSpendHours = new Hours(Math.floor(timeSpend / 60), (timeSpend % 60), 0);
+        this.timeSpendHours = new Hour(Math.floor(timeSpend / 60), (timeSpend % 60), 0);
         console.log(this.worklogSelected);
         this.getWorklogDetails();
       }

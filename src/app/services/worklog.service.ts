@@ -5,7 +5,7 @@ import {Observable, pipe, Subject} from 'rxjs';
 import {Worklog} from '../models/worklog';
 import {AuthService} from './auth.service';
 import {last, tap} from 'rxjs/operators';
-import {Hours} from '../models/hours';
+import {Hour} from '../models/hour';
 import * as moment from 'moment';
 import {WeekHours} from '../models/weekHours';
 import {WorklogSend} from '../models/worklogSend';
@@ -17,16 +17,17 @@ import {WorklogUpdate} from "../models/worklogUpdate";
     providedIn: 'root',
 })
 export class WorklogService {
-    dayHours: Hours;
+    dayHours: Hour;
     private authUrl: string;
     private worklogUrl: string;
     weekHours: WeekHours;
-    monthHour: Hours;
+    monthHour: Hour;
     worklogSelected: DayDate;
     private weekSelected: number;
     monthSelected: Date;
     daySelected: Date;
     private workedHoursUrl: string;
+    private workedHoursWeeksUrl: string;
     private workedHoursDayUrl: string;
     private createWorklogUrl: string;
     private deleteWorklogUrl: string;
@@ -42,6 +43,7 @@ export class WorklogService {
         this.authUrl = 'http://localhost:4100/api/v1/auth.login';
         this.worklogUrl = 'http://localhost:4100/api/v1/worklogs.monthList';
         this.workedHoursUrl = 'http://localhost:4100/api/v1/worklogs.workedHours';
+        this.workedHoursWeeksUrl = 'http://localhost:4100/api/v1/worklogs.workedHoursWeeks';
         this.workedHoursDayUrl = 'http://localhost:4100/api/v1/worklogs.workedHoursDay';
         this.createWorklogUrl = 'http://localhost:4100/api/v1/worklogs.create';
         this.deleteWorklogUrl = 'http://localhost:4100/api/v1/worklogs.delete';
@@ -60,6 +62,16 @@ export class WorklogService {
             endDay: endDay.toString()
         });
         return this.http.get(this.workedHoursUrl, { headers: header }).pipe(tap(x => {
+        }));
+    }
+    getWorkedHoursWeek(year: number, month: number) {
+        const header = new HttpHeaders({
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + this.accessToken,
+            year: year.toString(),
+            month: month.toString()
+        });
+        return this.http.get(this.workedHoursWeeksUrl, { headers: header }).pipe(tap(x => {
         }));
     }
     getWorkedHoursDay(year: number, month: number , day: number) {
@@ -105,7 +117,7 @@ export class WorklogService {
     public convertMinutesToHours(minutes: number) {
         const hours = Math.floor(minutes / 60);
         const minutes2 = minutes % 60;
-        this.monthHour = new Hours(hours, minutes2, 0);
+        this.monthHour = new Hour(hours, minutes2, 0);
         return this.monthHour;
     }
     getWeeksInMonth(month, year) {
@@ -177,10 +189,10 @@ export class WorklogService {
     public getWorklogSelected(): DayDate {
         return  this.worklogSelected;
     }
-    public setDayHours(dayHours: Hours) {
+    public setDayHours(dayHours: Hour) {
         this.dayHours = dayHours;
     }
-    public getDayHours(): Hours {
+    public getDayHours(): Hour {
         return this.dayHours;
     }
 }

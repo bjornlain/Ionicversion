@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Hours} from '../models/hours';
+import {Hour} from '../models/hour';
 import {DayDate} from '../models/dayDate';
 import {WorklogService} from '../services/worklog.service';
 import {AuthService} from '../services/auth.service';
@@ -32,7 +32,7 @@ export class UpdateWorklogComponent implements OnInit {
   worked: number;
   worklogSelected: DayDate;
   yearArray: number[] = [];
-  dayHours: Hours = new Hours(0, 0, 0);
+  dayHours: Hour = new Hour(0, 0, 0);
   dayString: string;
   dayString2: string;
   task: any;

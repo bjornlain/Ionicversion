@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {WorklogService} from '../services/worklog.service';
-import {Hours} from '../models/hours';
+import {Hour} from '../models/hour';
 import {timer} from 'rxjs';
 import {Router} from '@angular/router';
 import {Token} from '../models/token';
@@ -20,19 +20,19 @@ export class ClockPage {
   pauseIn = false;
   today: Date;
   monthArray: Worklog[] = [];
-  weekHours: Hours;
-  monthHours: Hours;
-  weekHoursLeft: Hours;
-  monthHoursLeft: Hours;
-  todayHours: Hours;
-  clockInTime: Hours;
+  weekHours: Hour;
+  monthHours: Hour;
+  weekHoursLeft: Hour;
+  monthHoursLeft: Hour;
+  todayHours: Hour;
+  clockInTime: Hour;
   workLog: Worklog;
   todayDate: Date;
   worklogsMonth: Worklog[];
   worklogsWeek: Worklog[];
-  timeWorking: Hours = new Hours( 0, 0, 0);
-  timeBreaking: Hours = new Hours( 0, 0, 0);
-  timeTodayLeft: Hours = new Hours( 8 , 0 , 0);
+  timeWorking: Hour = new Hour( 0, 0, 0);
+  timeBreaking: Hour = new Hour( 0, 0, 0);
+  timeTodayLeft: Hour = new Hour( 8 , 0 , 0);
   interval = null;
   intervalBreak = null;
   overall;
@@ -57,9 +57,9 @@ export class ClockPage {
       this.monthHours = this.worklogService.convertMinutesToHours(monthMinutes);
       if (this.monthHours.minutes === 60 ) { this.monthHours.minutes = 0; }
       if (this.monthHours.minutes > 0 ) {
-        this.monthHoursLeft = new Hours(160 - this.monthHours.hours - 1, 60 - this.monthHours.minutes, 0);
+        this.monthHoursLeft = new Hour(160 - this.monthHours.hours - 1, 60 - this.monthHours.minutes, 0);
       } else {
-        this.monthHoursLeft = new Hours(160 - this.monthHours.hours, 60 - this.monthHours.minutes, 0);
+        this.monthHoursLeft = new Hour(160 - this.monthHours.hours, 60 - this.monthHours.minutes, 0);
       }
     });
  }
@@ -76,9 +76,9 @@ export class ClockPage {
         this.weekHours = this.worklogService.convertMinutesToHours(weekMinutes);
         if (this.weekHours.minutes === 60 ) { this.weekHours.minutes = 0; }
         if (this.weekHours.minutes > 0) {
-          this.weekHoursLeft = new Hours( 40 - this.weekHours.hours - 1, 60 - this.weekHours.minutes, 0);
+          this.weekHoursLeft = new Hour( 40 - this.weekHours.hours - 1, 60 - this.weekHours.minutes, 0);
         } else {
-          this.weekHoursLeft = new Hours( 40 - this.weekHours.hours, 60 - this.weekHours.minutes, 0);
+          this.weekHoursLeft = new Hour( 40 - this.weekHours.hours, 60 - this.weekHours.minutes, 0);
         }
       });
   });
@@ -88,7 +88,7 @@ export class ClockPage {
   }
   clockIn() {
     this.clockedIn = !this.clockedIn;
-    this.clockInTime = new Hours(new Date().getHours(), new Date().getMinutes(), 0);
+    this.clockInTime = new Hour(new Date().getHours(), new Date().getMinutes(), 0);
     this.interval = setInterval(() => {
       this.timeWorking.seconds ++;
       if (this.timeWorking.seconds === 60) {
@@ -100,9 +100,9 @@ export class ClockPage {
         this.timeWorking.hours ++;
       }
       if (this.timeWorking.seconds > 0 || this.timeWorking.minutes > 0) {
-        this.timeTodayLeft = new Hours(8 - this.timeWorking.hours - 1, 60 - this.timeWorking.minutes - 1, 60 - this.timeWorking.seconds);
+        this.timeTodayLeft = new Hour(8 - this.timeWorking.hours - 1, 60 - this.timeWorking.minutes - 1, 60 - this.timeWorking.seconds);
       } else {
-        this.timeTodayLeft = new Hours(8 - this.timeWorking.hours, 60 - this.timeWorking.minutes - 1, 60 - this.timeWorking.seconds);
+        this.timeTodayLeft = new Hour(8 - this.timeWorking.hours, 60 - this.timeWorking.minutes - 1, 60 - this.timeWorking.seconds);
       }
     }, 1000);
   }
