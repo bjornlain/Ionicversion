@@ -49,7 +49,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'createTask/:page',
+        path: 'createTask',
         children: [
           {
             path: '',
