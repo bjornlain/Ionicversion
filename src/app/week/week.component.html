@@ -6,19 +6,19 @@
           <img id="arrowLeft" src="../../assets/ArrowLeft.png">
           <p (click)="goBack()" id="month">{{monthString}}</p>
         </div>
-        <ion-icon (click)="goToCreateWorklogDate()" id="plusIcon" name="add-circle"></ion-icon>
+        <ion-icon (click)="chooseCreate()" id="plusIcon" name="add-circle"></ion-icon>
       </div>
     </ion-item>
   </ion-header>
   <div *ngIf="isChoosing" id="choice">
-    <div id="worklog">
+    <div (click)="goToCreateWorklog()" id="worklog">
       <p id="worklogText">NEW WORKLOG</p>
     </div>
-    <div id="task">
+    <div (click)="goToCreateTask()" id="task">
       <p id="taskText">NEW TASK</p>
     </div>
   </div>
-  <div class="boxWeek">
+  <div  class="boxWeek">
     <p class="textWeek">WEEK {{weekHours.weekNumber}}</p>
   </div>
   <div *ngIf="allDataReceived">

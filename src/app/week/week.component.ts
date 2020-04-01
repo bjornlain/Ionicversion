@@ -57,15 +57,22 @@ export class WeekComponent implements OnInit {
     this.worklogService.setDaySelected(day);
     this.router.navigate(['/tabs/day']);
   }
-  goToCreateWorklogDate(){
-    /*this.worklogService.setDaySelected(this.weekDates[0].date);
-    console.log(this.weekDates[0].date);
-    this.router.navigate(['/tabs/createWorklogDate', 'week']);*/
+  chooseCreate(){
     if (this.isChoosing === false) {
       this.isChoosing = true;
     } else {
       this.isChoosing = false;
     }
+  }
+  goToCreateWorklog(){
+    this.worklogService.setDaySelected(this.weekDates[0].date);
+    console.log(this.weekDates[0].date);
+    this.isChoosing = false;
+    this.router.navigate(['/tabs/createWorklogDate', 'week']);
+  }
+  goToCreateTask(){
+    this.isChoosing = false;
+    this.router.navigate(['/tabs/createTask', 'week']);
   }
   convertToWeekDateArray() {
       this.authService.token.subscribe(x => { if (x) {

@@ -23,6 +23,7 @@ export class TimesheetsComponent implements OnInit {
   weekHours: Hour;
   monthHoursReceived = false;
   daysWorked: number;
+  isChoosing: boolean = false;
   minutesPerDay: number;
   worklogsMonth: Worklog[] = [];
   worklogsWeek: Worklog[] = [];
@@ -67,10 +68,22 @@ export class TimesheetsComponent implements OnInit {
     console.log(this.weeksOfMonth);
     this.getMonthHours(this.weeksOfMonth);
   }
+  chooseCreate(){
+    if (this.isChoosing === false) {
+      this.isChoosing = true;
+    } else {
+      this.isChoosing = false;
+    }
+  }
   goToCreateWorklogDate(){
     let monthDate = new Date(2020, this.monthNames.indexOf(this.monthToday) , 1);
     this.worklogService.setMonthSelected(monthDate);
+    this.isChoosing = false;
     this.router.navigate(['/tabs/createWorklogDate', 'timesheets']);
+  }
+  goToCreateTask(){
+    this.isChoosing = false;
+    this.router.navigate(['/tabs/createTask', 'timesheets']);
   }
   getMonthHours(weeksOfMonth) {
     const month = this.monthNames.indexOf(this.selectedDevice);

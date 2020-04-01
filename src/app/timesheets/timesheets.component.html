@@ -3,10 +3,18 @@
     <ion-item>
       <div id="topNav">
         <p id="timesheet">TIMESHEETS</p>
-        <ion-icon (click)="goToCreateWorklogDate()" id="plusIcon" name="add-circle"></ion-icon>
+        <ion-icon (click)="chooseCreate()" id="plusIcon" name="add-circle"></ion-icon>
       </div>
     </ion-item>
   </ion-header>
+  <div *ngIf="isChoosing" id="choice">
+    <div (click)="goToCreateWorklogDate()" id="worklog">
+      <p id="worklogText">NEW WORKLOG</p>
+    </div>
+    <div (click)="goToCreateTask()" id="task">
+      <p id="taskText">NEW TASK</p>
+    </div>
+  </div>
   <div class="boxYear">
     <p class="textYear">YEAR {{yearToday}}</p>
   </div>

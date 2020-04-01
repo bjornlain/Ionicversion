@@ -49,6 +49,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'createTask/:page',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+                import('../create-task/create-task.module').then(m => m.CreateTaskModule)
+          }
+        ]
+      },
+      {
         path: 'day',
         children: [
           {
@@ -130,7 +140,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/createWorklogDate',
+        redirectTo: '/tabs/createTask',
         pathMatch: 'full'
       }
     ]
