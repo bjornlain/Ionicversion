@@ -70,3 +70,22 @@
   height:23px;
   width:23px;
 }
+#choice{
+  position: absolute;
+  width:100%;
+  height:20px;
+}
+#worklog{
+  width:100%;
+  height:30px;
+  background-color: blue;
+}
+#task{
+  width:100%;
+  height:30px;
+  background-color: lightblue;
+}
+#worklogText,#taskText{
+  font-size: 13px;
+  margin: auto 0 auto 15px;
+}

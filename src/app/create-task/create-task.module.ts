@@ -3,15 +3,15 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {CreateWorklogComponent} from './create-worklog.component';
+import {CreateTaskComponent} from '../create-task/create-task.component';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{path: '', component: CreateWorklogComponent}])
+    RouterModule.forChild([{path: '', component: CreateTaskComponent}])
   ],
-  declarations: [CreateWorklogComponent]
+  declarations: [CreateTaskComponent]
 })
-export class CreateWorklogModule {}
+export class CreateTaskModule {}

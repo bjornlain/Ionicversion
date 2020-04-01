@@ -21,6 +21,7 @@ export class WeekComponent implements OnInit {
   monthString: string;
   allDataReceived = false;
   counter = 0;
+  isChoosing: boolean = false;
   hours: Hour;
   monthNames: string[] = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'];
@@ -57,9 +58,14 @@ export class WeekComponent implements OnInit {
     this.router.navigate(['/tabs/day']);
   }
   goToCreateWorklogDate(){
-    this.worklogService.setDaySelected(this.weekDates[0].date);
+    /*this.worklogService.setDaySelected(this.weekDates[0].date);
     console.log(this.weekDates[0].date);
-    this.router.navigate(['/tabs/createWorklogDate', 'week']);
+    this.router.navigate(['/tabs/createWorklogDate', 'week']);*/
+    if (this.isChoosing === false) {
+      this.isChoosing = true;
+    } else {
+      this.isChoosing = false;
+    }
   }
   convertToWeekDateArray() {
       this.authService.token.subscribe(x => { if (x) {
