@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {WorklogService} from '../services/worklog.service';
 import {AuthService} from '../services/auth.service';
+import {Hour} from '../models/hour';
 
 @Component({
   selector: 'app-create-worklog-date',
@@ -20,27 +21,50 @@ export class CreateWorklogDateComponent implements OnInit {
   monthSelected;
   yearSelected;
   worked: number;
+  startHours: any;
   task = '';
-  constructor(private router: Router, private worklogService: WorklogService, private authService: AuthService) {
+  previousPage: string;
+  constructor(private router: Router, private worklogService: WorklogService, private authService: AuthService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.previousPage = this.route.snapshot.paramMap.get('page');
+    this.router.events.subscribe((ev) => {
+      if (ev instanceof NavigationEnd) {
+        this.description = '';
+        if (this.previousPage === 'clock') {
+          const dateNow = new Date();
+          console.log(dateNow);
+          this.daySelected = dateNow.getDate().toString();
+          this.monthSelected = (dateNow.getMonth() + 1).toString();
+          this.yearSelected = dateNow.getFullYear().toString();
+        } else if ( this.previousPage === 'timesheets') {
+          const monthSelected = this.worklogService.getMonthSelected();
+          this.daySelected = monthSelected.getDate().toString();
+          this.monthSelected = (monthSelected.getMonth() + 1).toString();
+          this.yearSelected = monthSelected.getFullYear().toString();
+        } else if (this.previousPage === 'week') {
+          const daySelected = new Date(this.worklogService.getDaySelected());
+          this.daySelected = daySelected.getDate().toString();
+          this.monthSelected = (daySelected.getMonth() + 1).toString();
+          this.yearSelected = daySelected.getFullYear().toString();
+        }
+      }
+    });
   }
-
-  goBackToDay() {
-    // werkt niet !
-   // this.location.;
+  goBackToPreviousPage() {
+    this.router.navigate(['/tabs/' + this.previousPage]);
   }
   updateStartingHours($event) {
     console.log($event);
-    this.startMinutes = (+$event.substr(11, 2) * 60) + +$event.substr(14, 2);
+    this.startMinutes = (+$event.substr(0, 2) * 60) + +$event.substr(3, 2);
   }
   updateEndingHours($event) {
     console.log($event);
-    this.endMinutes = (+$event.substr(11, 2) * 60) + +$event.substr(14, 2);
+    this.endMinutes = (+$event.substr(0, 2) * 60) + +$event.substr(3, 2);
   }
   saveTask() {
-    this.router.navigate(['/tabs/day']);
+    this.router.navigate(['/tabs/' + this.previousPage]);
     this.authService.token.subscribe(x => {
       if (x) {
         if (x.access_token != null) {
@@ -55,11 +79,11 @@ export class CreateWorklogDateComponent implements OnInit {
           const date = new Date(this.yearSelected, this.monthSelected - 1, this.daySelected);
           console.log(date);
           const startDate = new Date(date);
-          startDate.setHours(Math.floor(this.startMinutes / 60));
+          startDate.setHours(Math.floor(this.startMinutes / 60 ) + 1);
           startDate.setMinutes(this.startMinutes % 60);
           console.log(startDate);
           const endDate = new Date(date);
-          endDate.setHours(Math.floor(this.endMinutes / 60));
+          endDate.setHours(Math.floor(this.endMinutes / 60) + 1);
           endDate.setMinutes(this.endMinutes % 60);
           console.log(endDate);
 

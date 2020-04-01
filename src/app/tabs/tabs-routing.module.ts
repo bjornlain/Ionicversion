@@ -29,7 +29,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'createWorklogDate',
+        path: 'createWorklogDate/:page',
         children: [
           {
             path: '',
@@ -39,7 +39,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'createWorklog',
+        path: 'createWorklog/:page',
         children: [
           {
             path: '',

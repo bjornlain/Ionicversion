@@ -51,19 +51,19 @@ export class UpdateWorklogComponent implements OnInit {
     console.log(this.dayHours);
     this.description = this.worklogSelected.description;
     this.task = this.worklogSelected.task._id;
-    console.log('day selected' + this.worklogService.getDaySelected().getDate());
-    console.log('month selected ' + this.worklogService.getMonthSelected().getMonth());
-    this.daySelected = this.worklogService.getDaySelected().getDate().toString();
-    this.monthSelected = this.monthArray[this.worklogService.getMonthSelected().getMonth()];
+    let day = new Date(this.worklogService.getDaySelected());
+    console.log('day selected' + day.getDate());
+    console.log('month selected ' + day.getMonth());
+    this.daySelected = day.getDate().toString();
+    this.monthSelected = this.monthArray[day.getMonth()];
     this.yearSelected = '2020';
     this.project = 'Project';
     this.startMinutes = this.worklogSelected.startDate.getHours() * 60 + this.worklogSelected.startDate.getMinutes();
     this.endMinutes = this.worklogSelected.endDate.getHours() * 60 + this.worklogSelected.endDate.getMinutes();
-    this.thisDay = this.worklogService.getDaySelected();
-    this.dayString = this.weekNames[this.thisDay.getDay()] + ', ' + this.thisDay.getDate()
-        + ' ' + this.monthNames[this.thisDay.getMonth()];
-    this.dayString2 = this.weekNames2[this.thisDay.getDay()] + ', ' + this.thisDay.getDate()
-        + ' ' + this.monthNames[this.thisDay.getMonth()].toLowerCase();
+    this.dayString = this.weekNames[day.getDay()] + ', ' + day.getDate()
+        + ' ' + this.monthNames[day.getMonth()];
+    this.dayString2 = this.weekNames2[day.getDay()] + ', ' + day.getDate()
+        + ' ' + this.monthNames[day.getMonth()].toLowerCase();
     this.converToThisStartAndEndHours();
   }
   converToThisStartAndEndHours() {

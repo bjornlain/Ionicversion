@@ -1,12 +1,14 @@
 import {Hour} from "./hour";
 
 export class WeekDate{
+    _id: string;
     hour: Hour;
-    weekDate: string;
+    dayString: string;
     date: Date;
-    constructor(hour: Hour , weekDate: string, date: Date) {
+    constructor(_id: string, hour: Hour , dayString: string, date: Date) {
+        this._id = _id;
         this.hour = hour;
-        this.weekDate = weekDate;
+        this.dayString = dayString;
         this.date = date;
     }
 }

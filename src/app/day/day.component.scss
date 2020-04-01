@@ -58,6 +58,7 @@
   font-weight: 500;
   max-width: 250px;
 }
+
 .box{
   display: flex;
   flex-direction: row;
@@ -120,8 +121,19 @@
   flex-direction: row;
 }
 .hours{
+  font-size: 12px;
+  font-weight: 300;
   margin: 5px 10px 0 0;
 }
 .dotImage{
   margin-right:-15px;
+}
+.itemSliding{
+}
+.worklogList{
+  width:100%;
+  position: relative;
+  overflow: hidden;
+  overflow-y: auto;
+  height: calc(100% - 250px);
 }

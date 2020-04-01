@@ -66,11 +66,11 @@ export class TimesheetsComponent implements OnInit {
     this.weeksOfMonth = this.worklogService.getWeeksInMonth(this.monthNames.indexOf(this.monthToday), this.todayDate.getFullYear());
     console.log(this.weeksOfMonth);
     this.getMonthHours(this.weeksOfMonth);
-   /* this.weekHoursMonth = this.worklogService.calculateWeekHoursperMonth(this.monthToday , this.yearToday);
-    this.monthHours = this.worklogService.calculateMonthHours(this.yearToday, this.monthNames.indexOf(this.selectedDevice));
-    this.daysWorked = this.worklogService.getDaysWorked();
-    this.minutesPerDay = (this.monthHours.hours * 60 + this.monthHours.minutes) / this.daysWorked;
-    this.averageHoursDay = new Hours(Math.floor(this.minutesPerDay / 60) , Math.round(this.minutesPerDay % 60) , 0); */
+  }
+  goToCreateWorklogDate(){
+    let monthDate = new Date(2020, this.monthNames.indexOf(this.monthToday) , 1);
+    this.worklogService.setMonthSelected(monthDate);
+    this.router.navigate(['/tabs/createWorklogDate', 'timesheets']);
   }
   getMonthHours(weeksOfMonth) {
     const month = this.monthNames.indexOf(this.selectedDevice);
@@ -109,72 +109,8 @@ export class TimesheetsComponent implements OnInit {
         this.worklogService.getWorkedHoursWeek(this.todayDate.getFullYear(), this.monthNames.indexOf(this.selectedDevice)).subscribe( x => {
 
           this.weekHoursMonth = x as WeekHours[];
-          if(x.length !== 0){
-            console.log(x);
-            this.allDataReceived = true;
-          }
-          /* this.i++;
-            this.worklogsWeek = x as Worklog[];
-            console.log(this.worklogsWeek);
-            let weekMinutes = 0;
-            for (const day of this.worklogsWeek) {
-              weekMinutes += day.worked;
-            }
-            console.log(weekMinutes);
-            if (this.worklogsWeek.length !== 0) {
-              const weekNumber = moment(this.worklogsWeek[0].startDate).week();
-              const hours = Math.floor(weekMinutes / 60);
-              const minutes = weekMinutes % 60;
-              this.weekHours = new Hours(hours, minutes, 0);
-              console.log(this.weekHours);
-              console.log('weeknumber= ' + weekNumber);
-              console.log(this.weeksOfMonth);
-              console.log(this.i);
-              console.log(this.weeksOfMonth[this.i - 1].start);
-              console.log(this.weeksOfMonth[this.i - 1].end);
-              this.weekHoursMonthTemp[this.i] = new WeekHours( weekNumber, this.weekHours, this.weeksOfMonth[this.i - 1].start, this.weeksOfMonth[this.i - 1].end);
-              console.log('i = ' + this.i + ' length ' + this.weeksOfMonth.length);
-              if (this.i === this.weeksOfMonth.length) {
-                console.log(this.worklogsWeek);
-                this.monthSelected = new Date(this.worklogsWeek[0].startDate);
-                this.worklogService.setMonthSelected(this.monthSelected);
-                this.weekHoursMonthTemp.shift();
-                this.weekHoursMonthTemp.sort((a, b) => a.weekNumber - b.weekNumber);
-                let j = 0;
-                for (const week of this.weeksOfMonth) {
-                  this.weekHoursMonthTemp[j].startDay = week.start;
-                  this.weekHoursMonthTemp[j].endDay = week.end;
-                  j++;
-                }
-                console.log(this.weekHoursMonthTemp);
-                this.weekHoursMonth = this.weekHoursMonthTemp;
-                this.allDataReceived = true;
-              }
-            } else {
-              console.log(this.weeksOfMonth[this.i - 1]);
-              console.log(this.monthNames.indexOf(this.monthToday));
-              const date = new Date(2020, this.monthNames.indexOf(this.monthToday), this.weeksOfMonth[this.i - 1].start);
-              console.log(date);
-              const weekNumber = moment(date).week();
-              this.weekHoursMonthTemp[this.i] = new WeekHours( weekNumber, new Hours(0, 0, 0), this.weeksOfMonth[this.i - 1].start, this.weeksOfMonth[this.i - 1].end);
-              if (this.i === this.weeksOfMonth.length) {
-                console.log(this.worklogsWeek);
-                this.monthSelected = new Date(date);
-                this.worklogService.setMonthSelected(this.monthSelected);
-                console.log(this.weekHoursMonthTemp);
-                this.weekHoursMonthTemp.shift();
-                this.weekHoursMonthTemp.sort((a, b) => a.weekNumber - b.weekNumber);
-                let j = 0;
-                for (const week of this.weeksOfMonth) {
-                  this.weekHoursMonthTemp[j].startDay = week.start;
-                  this.weekHoursMonthTemp[j].endDay = week.end;
-                  j++;
-                }
-                this.weekHoursMonth = this.weekHoursMonthTemp;
-                this.allDataReceived = true;
-              }
-            }
-*/
+          console.log(x);
+          this.allDataReceived = true;
           });
       }
       }

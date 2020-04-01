@@ -18,18 +18,28 @@
     </div>
 
   </div>
-  <div  *ngIf="allDataReceived">
-    <div (click)="goToDetails(task)"   class="box"  *ngFor="let task of dayWorklogs" >
-      <div class="columnFlex" >
-        <p class="textBox">{{task.description}}</p>
-      </div>
-      <div class="dots">
-        <p class="hours">{{task.hours.hours | add04}}:{{task.hours.minutes | add04}}:00</p>
-        <img (click)="goToUpdate(task)" class="dotImage" src="../../assets/Edit%20Hours-black.svg">
-      </div>
-    </div>
-
+  <div class="worklogList">
+    <ion-list  *ngIf="allDataReceived" >
+          <ion-item-sliding  *ngFor="let task of dayWorklogs"  >
+            <ion-item class="itemSliding">
+              <ion-label (click)="goToDetails(task)"   class="box">
+                <div class="columnFlex" >
+                  <p class="textBox">{{task.description}}</p>
+                </div>
+                <div class="dots">
+                  <p class="hours">{{task.hours.hours | add04}}:{{task.hours.minutes | add04}}:00</p>
+                </div>
+              </ion-label>
+            </ion-item>
+            <ion-item-options side="end">
+              <ion-item-option (click)="deleteWorklog(task)" color="danger">
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+    </ion-list>
   </div>
+
   <div id="overall">
     <div class="todayDiv margin">
       <p class="textTotalHours">TOTAL HOURS</p>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {WeekHours} from '../models/weekHours';
 import {WorklogService} from '../services/worklog.service';
@@ -7,6 +7,7 @@ import {Worklog} from '../models/worklog';
 import * as moment from '../timesheets/timesheets.component';
 import {Hour} from '../models/hour';
 import {AuthService} from '../services/auth.service';
+import {IonTabs} from "@ionic/angular";
 
 
 @Component({
@@ -32,7 +33,7 @@ export class WeekComponent implements OnInit {
     this.weekDates = [];
     this.weekHours = this.worklogService.getWeekHours();
     this.monthSelected = this.worklogService.getMonthSelected();
-    console.log(this.worklogService.getMonthSelected());
+    console.log(this.weekHours);
     this.monthString = this.monthNames[this.monthSelected.getMonth()];
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
@@ -55,51 +56,24 @@ export class WeekComponent implements OnInit {
     this.worklogService.setDaySelected(day);
     this.router.navigate(['/tabs/day']);
   }
-
+  goToCreateWorklogDate(){
+    this.worklogService.setDaySelected(this.weekDates[0].date);
+    console.log(this.weekDates[0].date);
+    this.router.navigate(['/tabs/createWorklogDate', 'week']);
+  }
   convertToWeekDateArray() {
-    for (let i = this.weekHours.startDay; i <= this.weekHours.endDay; i++) {
       this.authService.token.subscribe(x => { if (x) {
         if (x.access_token != null) {
-          this.worklogService.getWorkedHoursDay(this.monthSelected.getFullYear(), this.monthSelected.getMonth(),
-              i).subscribe( x => {
-            this.counter++;
-            this.workLogsDay = x as Worklog[];
-            if (this.workLogsDay.length > 0) {
-              console.log(this.workLogsDay);
-              let dayMinutes = 0;
-              for (const day of this.workLogsDay) {
-                dayMinutes += day.worked;
-              }
-              console.log(dayMinutes);
-              const hours = Math.floor(dayMinutes / 60);
-              const minutes = dayMinutes % 60;
-              console.log(this.counter - 1);
-              this.weekDates[this.counter - 1] = new WeekDate(null, null, null);
-              this.hours = new Hour(hours, minutes, 0);
-              this.weekDates[this.counter - 1].hours = this.hours;
-              const date = new Date(this.workLogsDay[0].startDate);
-              console.log(date);
-              console.log(this.weekDates[this.counter - 1].hours);
-              console.log(i);
-              const date2 = new Date(this.monthSelected.getFullYear(), this.monthSelected.getMonth(), i);
-              this.weekDates[this.counter - 1].date = date2;
-              this.weekDates[this.counter - 1].weekDate = this.weekNames[date.getDay()] + '. ' + date.getDate()
-                  + ' ' + this.monthNames[date.getMonth()];
-            } else {
-              const date2 = new Date(this.monthSelected.getFullYear(), this.monthSelected.getMonth(), i);
-              this.weekDates[this.counter - 1] = new WeekDate(new Hour(0, 0, 0), this.weekNames[date2.getDay()]
-                  + '. ' +  i + ' ' + this.monthNames[this.monthSelected.getMonth()], date2);
-            }
-            if (this.counter === (this.weekHours.endDay - this.weekHours.startDay + 1)) {
-              console.log(this.weekDates);
-              this.weekDates.sort((a, b) => (a.date.getDate() > b.date.getDate()) ? 1 : -1);
-              this.allDataReceived = true;
-            }
+          this.worklogService.getWorkedHoursWeekDays(this.monthSelected.getFullYear(), this.monthSelected.getMonth(),
+              this.weekHours.startDay, this.weekHours.endDay).subscribe( x => {
+            this.weekDates = x as WeekDate[];
+            console.log(this.weekDates);
+            this.allDataReceived = true;
           });
           }
  }
       });
     }
 }
-}
+
 

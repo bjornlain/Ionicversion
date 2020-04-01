@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
+import {NavigationEnd, NavigationStart, Router} from '@angular/router';
 import {WorklogService} from '../services/worklog.service';
 import {Hour} from '../models/hour';
 import {AuthService} from '../services/auth.service';
@@ -44,18 +44,18 @@ export class WorklogDetailsComponent implements OnInit {
     this.todayHours = new Hour(new Date().getHours(), new Date().getMinutes(), 0);
     console.log(this.worklogSelected);
     this.router.events.subscribe((ev) => {
-      if (ev instanceof NavigationEnd) {
+      if (ev instanceof NavigationEnd ) {
+        this.weekSelected = this.worklogService.getWeekSelected();
+        this.worklogSelected = this.worklogService.getWorklogSelected();
         const startDate = new Date(this.worklogSelected.startDate);
         const endDate = new Date(this.worklogSelected.endDate);
         this.dayHours = this.worklogService.getWorklogSelected().hours;
         this.startHours = new Hour(startDate.getHours(), startDate.getMinutes(), 0);
         this.endHours = new Hour(endDate.getHours(), endDate.getMinutes(), 0);
         this.todayHours = new Hour(new Date().getHours(), new Date().getMinutes(), 0);
-        this.weekSelected = this.worklogService.getWeekSelected();
-        this.worklogSelected = this.worklogService.getWorklogSelected();
-        this.taskTitle = this.worklogSelected.task.key;
+        this.taskTitle = this.worklogSelected.task.description;
         this.taskDescription = this.worklogSelected.description;
-        this.daySelected = this.worklogService.getDaySelected();
+        this.daySelected = new Date(this.worklogService.getDaySelected());
         const timeSpend = (this.endHours.hours * 60 + this.endHours.minutes) - (this.startHours.hours * 60 + this.startHours.minutes);
         this.timeSpendHours = new Hour(Math.floor(timeSpend / 60), (timeSpend % 60), 0);
         console.log(this.worklogSelected);
@@ -77,6 +77,9 @@ export class WorklogDetailsComponent implements OnInit {
       }
     });
   }
+  createNewWorklog(){
+    this.router.navigate(['/tabs/createWorklog', 'worklog-details']);
+  }
   goBack() {
     this.router.navigate(['/tabs/day']);
   }
@@ -86,7 +89,6 @@ export class WorklogDetailsComponent implements OnInit {
   deleteWorklog(){
     const worklog = this.worklogService.getWorklogSelected();
     console.log(worklog);
-    this.worklogService.deleteWorklog(worklog._id);
     this.authService.token.subscribe(x => {
       if (x) {
         if (x.access_token != null) {

@@ -32,10 +32,10 @@ export class DayComponent implements OnInit {
     this.router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
         this.counter = 0;
-        this.dayWorklogs= [];
+        this.dayWorklogs = [];
         this.weekSelected = this.worklogService.getWeekSelected();
-        this.daySelected = this.worklogService.getDaySelected();
-        console.log(this.daySelected);
+        this.daySelected = new Date(this.worklogService.getDaySelected());
+        console.log(this.daySelected.getFullYear());
         this.getWorklogsDay();
       }
     });
@@ -46,15 +46,30 @@ export class DayComponent implements OnInit {
   goToDetails(worklog: DayDate){
     console.log(worklog);
     this.worklogService.setWorklogSelected(worklog);
+    console.log(this.worklogService.getWorklogSelected());
     this.router.navigate(['/tabs/worklog-details']);
   }
   goToUpdate(worklog: DayDate){
     this.worklogService.setWorklogSelected(worklog);
     this.router.navigate(['/tabs/update-worklog']);
   }
+  deleteWorklog(worklog: DayDate) {
+    console.log(worklog);
+    this.authService.token.subscribe(x => {
+      if (x) {
+        if (x.access_token != null) {
+          this.worklogService.deleteWorklog(worklog._id)
+              .subscribe(x => {
+                console.log("deleted" + worklog._id);
+              });
+        }
+      }
+    });
+  }
   getWorklogsDay(){
     this.authService.token.subscribe(x => { if(x)
       if(x.access_token != null){
+        console.log(this.daySelected.getFullYear());
         this.worklogService.getWorkedHoursDay(this.daySelected.getFullYear(), this.daySelected.getMonth(), this.daySelected.getDate())
             .subscribe( x => {
               this.worklogsDay = x as Worklog[];
@@ -95,6 +110,6 @@ export class DayComponent implements OnInit {
     });
   }
   createNewWorklog(){
-    this.router.navigate(['/tabs/createWorklog']);
+    this.router.navigate(['/tabs/createWorklog', 'day']);
   }
 }

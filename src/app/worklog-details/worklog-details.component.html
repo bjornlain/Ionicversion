@@ -7,7 +7,7 @@
           <img id="arrowLeft" src="../../assets/ArrowLeft.png">
           <p (click)="goBack()" class="mediumText">Week {{weekSelected}} - overview</p>
         </div>
-        <ion-icon id="plusIcon" name="add-circle"></ion-icon>
+        <ion-icon (click)="createNewWorklog()" id="plusIcon" name="add-circle"></ion-icon>
       </div>
     </ion-item>
   </ion-header>

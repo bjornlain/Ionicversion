@@ -28,6 +28,7 @@ export class WorklogService {
     daySelected: Date;
     private workedHoursUrl: string;
     private workedHoursWeeksUrl: string;
+    private workedHoursWeekDaysUrl: string;
     private workedHoursDayUrl: string;
     private createWorklogUrl: string;
     private deleteWorklogUrl: string;
@@ -44,6 +45,7 @@ export class WorklogService {
         this.worklogUrl = 'http://localhost:4100/api/v1/worklogs.monthList';
         this.workedHoursUrl = 'http://localhost:4100/api/v1/worklogs.workedHours';
         this.workedHoursWeeksUrl = 'http://localhost:4100/api/v1/worklogs.workedHoursWeeks';
+        this.workedHoursWeekDaysUrl = 'http://localhost:4100/api/v1/worklogs.workedHoursWeekDays';
         this.workedHoursDayUrl = 'http://localhost:4100/api/v1/worklogs.workedHoursDay';
         this.createWorklogUrl = 'http://localhost:4100/api/v1/worklogs.create';
         this.deleteWorklogUrl = 'http://localhost:4100/api/v1/worklogs.delete';
@@ -83,6 +85,18 @@ export class WorklogService {
             day: day.toString()
         });
         return this.http.get(this.workedHoursDayUrl, { headers: header }).pipe(tap(x => {
+        }));
+    }
+    getWorkedHoursWeekDays(year: number, month: number , startDay: number, endDay: number) {
+        const header = new HttpHeaders({
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + this.accessToken,
+            year: year.toString(),
+            month: month.toString(),
+            startday: startDay.toString(),
+            endday: endDay.toString()
+        });
+        return this.http.get(this.workedHoursWeekDaysUrl, { headers: header }).pipe(tap(x => {
         }));
     }
     createNewWorklog(project: string, task: string, description: string, user: string, worked: number, startDate: Date, endDate: Date) {

@@ -2,7 +2,7 @@
   <ion-header collapse="condense">
     <ion-item>
       <div id="topNav">
-        <p (click)="goBackToDay()" id="cancel">Cancel</p>
+        <p (click)="goBackToPreviousPage()" id="cancel">Cancel</p>
       </div>
     </ion-item>
   </ion-header>
@@ -46,8 +46,8 @@
     <p class="end">End-time</p>
   </div>
   <div id="pickers">
-    <ion-datetime (ionChange)="updateStartingHours(startHours.value)" #startHours id="startTimePicker" display-format="HH:mm" picker-format="HH:mm" value="2020-03-10T08:00Z"></ion-datetime>
-    <ion-datetime (ionChange)="updateEndingHours(endHours.value)" #endHours id="endTimePicker" display-format="HH:mm" picker-format="HH:mm" value="2020-03-10T16:00Z"></ion-datetime>
+    <ion-datetime (ionChange)="updateStartingHours(startHours.value)" #startHours id="startTimePicker" display-format="HH:mm" picker-format="HH:mm" value="09:00"></ion-datetime>
+    <ion-datetime (ionChange)="updateEndingHours(endHours.value)" #endHours id="endTimePicker" display-format="HH:mm" picker-format="HH:mm" value="17:00"></ion-datetime>
   </div>
   <div (click)="saveTask()" id="schedule">
     <p id="scheduleText">SAVE NEW ENTRY</p>

@@ -18,6 +18,8 @@ export class ClockPage {
   myDate: number;
   clockedIn = false;
   pauseIn = false;
+  allWeekDataReceived: boolean = false;
+  allMonthDataReceived: boolean = false;
   today: Date;
   monthArray: Worklog[] = [];
   weekHours: Hour;
@@ -25,7 +27,7 @@ export class ClockPage {
   weekHoursLeft: Hour;
   monthHoursLeft: Hour;
   todayHours: Hour;
-  clockInTime: Hour;
+  clockInTime: Hour = new Hour(0, 0, 0);
   workLog: Worklog;
   todayDate: Date;
   worklogsMonth: Worklog[];
@@ -61,6 +63,7 @@ export class ClockPage {
       } else {
         this.monthHoursLeft = new Hour(160 - this.monthHours.hours, 60 - this.monthHours.minutes, 0);
       }
+      this.allMonthDataReceived = true;
     });
  }
                                             const firstDayOfWeek = moment().startOf('week').toDate();
@@ -80,11 +83,9 @@ export class ClockPage {
         } else {
           this.weekHoursLeft = new Hour( 40 - this.weekHours.hours, 60 - this.weekHours.minutes, 0);
         }
+        this.allWeekDataReceived = true;
       });
   });
-  }
-  goCreateWorklogDate(){
-      this.router.navigate(['/tabs/createWorklogDate']);
   }
   clockIn() {
     this.clockedIn = !this.clockedIn;
@@ -106,6 +107,9 @@ export class ClockPage {
       }
     }, 1000);
   }
+    goToCreateWorklogDate(){
+        this.router.navigate(['/tabs/createWorklogDate', 'clock']);
+    }
   clockOut() {
     this.pauseTimer();
     if (!this.clockedIn) {
