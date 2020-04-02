@@ -11,27 +11,25 @@ import {TaskSend} from "../models/taskSend";
 @Injectable({
     providedIn: 'root',
 })
-export class TaskService {
-    private createTaskUrl: string;
+export class EmployeeService {
+    private getEmployeesUrl: string;
     private admin = JSON.stringify({
         email: 'bart@codious.io',
         password: 'test1234'
     });
     private accessToken: string = undefined;
     constructor(private http: HttpClient , private authService: AuthService) {
-        this.createTaskUrl = 'http://localhost:4100/api/v1/tasks.create';
+        this.getEmployeesUrl = 'http://localhost:4100/api/v1/employees.list';
         this.authService.token.subscribe(x => {
             if (x) { this.accessToken = x.access_token; }
         });
     }
-    createNewTask( deleted: boolean, key: string, description: string, due: Date , summary: string, project: string, reporter: string) {
+    getEmployees() {
         const header = new HttpHeaders({
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + this.accessToken
         });
-        const task = new TaskSend( deleted, key, reporter, description, due, summary, project);
-        console.log(task);
-        return this.http.post(this.createTaskUrl,  { body: JSON.stringify(task) }, {headers: header }).pipe(tap(x => {
+        return this.http.get(this.getEmployeesUrl, { headers: header }).pipe(tap(x => {
         }));
     }
 }

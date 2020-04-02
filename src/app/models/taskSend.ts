@@ -2,20 +2,18 @@ export class TaskSend{
     deleted: boolean;
     description: string;
     key: string;
-    assignee: string;
-    reporter: string;
     due: Date;
     project: string;
     summary: string;
-    constructor(  deleted: boolean, key: string, assignee: string,
-                  description: string, reporter: string , due: Date , summary: string, project: string) {
+    reporter: string;
+    constructor(  deleted: boolean, key: string, reporter: string,
+                  description: string, due: Date , summary: string, project: string) {
         this.project = project;
+        this.reporter = reporter;
         this.summary = summary;
         this.due = due;
         this.description = description;
-        this.assignee = assignee;
         this.deleted = deleted;
         this.key = key;
-        this.reporter = reporter;
     }
 }

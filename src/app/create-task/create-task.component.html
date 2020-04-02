@@ -8,11 +8,11 @@
     </ion-item>
   </ion-header>
   <p class="title">Project</p>
-  <ion-select placeholder="Assign project by key or name" class="project" interface="popover">
-    <ion-select-option value="Project">Project</ion-select-option>
+  <ion-select  placeholder="Assign project by key or name" class="project" interface="popover">
+    <ion-select-option *ngFor="let project of projectList" value="{{project._id}}">{{project.name}}</ion-select-option>
   </ion-select>
   <p class="title">Assigned to</p>
-  <ion-select placeholder="Employee name / name's" class="project"  [(ngModel)]="task" interface="popover">
+  <ion-select placeholder="Employee name / name's" class="project"  [(ngModel)]="employee" interface="popover">
     <ion-select-option value="5cc5a0218e552b09f484d888">5cc5a0218e552b09f484d888</ion-select-option>
   </ion-select>
   <p class="title">Description Task</p>
