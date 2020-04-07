@@ -14,4 +14,13 @@ export class SettingsComponent implements OnInit {
   logOut() {
     this.router.navigate(['/login']);
   }
+  goToInformation(){
+    this.router.navigate(['/tabs/information']);
+  }
+  goToNotifications(){
+    this.router.navigate(['/tabs/notification']);
+  }
+  goToExport(){
+    this.router.navigate(['/tabs/export']);
+  }
 }

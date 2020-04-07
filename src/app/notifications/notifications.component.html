@@ -1,12 +1,26 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-item>
-      <div class="rowFlex">
+      <div (click)="goBackToSettings()" class="rowFlex">
         <img id="arrowLeft" src="../../assets/ArrowLeft.png">
-        <p (click)="goBackToSettings()" id="back">Settings</p>
+        <p  id="back">Settings</p>
       </div>
       <div id="topNav">
         <p id="title">INFORMATION</p>
       </div>
     </ion-item>
   </ion-header>
+  <p id="schedule">SCHEDULE</p>
+  <div id="clockOut">
+    <p id="clockOutText">Clock out notifications</p>
+    <img src="../../assets/ArrowRight.png">
+  </div>
+  <p id="info">Enable notifications when your available to clock out according to the set up schedule.</p>
+  <div  (click)="setSound()" class="box box1">
+    <p class="textBox">Sound</p>
+    <div class="rowFlex">
+      <p class="blueText">Default</p>
+      <img src="../../assets/ArrowRight.png">
+    </div>
+  </div>
+</ion-content>

@@ -7,13 +7,13 @@
     </ion-item>
   </ion-header>
   <div id="outerDiv">
-    <div class="box">
+    <div (click)="goToInformation()" class="box">
       <p class="textBox">Information</p>
     </div>
-    <div class="box">
+    <div (click)="goToNotifications()" class="box">
       <p class="textBox">Notifications</p>
     </div>
-    <div class="box">
+    <div (click)="goToExport()" class="box">
       <p class="textBox">Export</p>
     </div>
     <div class="boxLogOut">

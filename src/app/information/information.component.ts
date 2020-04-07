@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-information',
@@ -8,8 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class InformationComponent implements OnInit {
   week: string[] = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
   isChoosingStart: boolean = false;
-  startOfWeek: string;
-  constructor() { }
+  startOfWeek: string = 'Monday';
+  constructor(private router: Router) { }
 
   ngOnInit() {}
 
@@ -21,12 +22,16 @@ export class InformationComponent implements OnInit {
     }
   }
   selectStartOfWeek(day: string){
-    this.startOfWeek = day.toLocaleUpperCase();
+    this.startOfWeek = day.toLowerCase();
     console.log(day);
     if (this.isChoosingStart === false) {
       this.isChoosingStart = true;
     } else {
       this.isChoosingStart = false;
     }
+  }
+  goBackToSettings(){
+    console.log("lol");
+    this.router.navigate(['/tabs/settings']);
   }
 }

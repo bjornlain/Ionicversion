@@ -23,3 +23,55 @@
   display: flex;
   flex-direction: row;
 }
+#schedule{
+  font-size: 14px;
+  font-weight: 500;
+  margin-top:45px;
+  margin-left:20px;
+  width:100%;
+}
+#clockOut{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #F6F6F6;
+  padding:0 20px 0 20px;
+}
+#clockOutText{
+  font-size: 14px;
+  font-weight: 500;
+}
+#info{
+  font-size: 10px;
+  font-weight: 500;
+  width:100%;
+  padding:0 30px 0 30px;
+}
+.rowFlex{
+  justify-content: center;
+  align-items: center ;
+  display: flex;
+  flex-direction: row;
+}
+.box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding:0 20px 0 20px;
+  width:100%;
+  background-color: #F6F6F6;
+  height:41px;
+  margin-bottom: 4px;
+  margin-top: 30px;
+}
+.textBox{
+  font-size: 14px;
+  font-weight: 500;
+}
+.blueText{
+  font-size: 14px;
+  font-weight: 400;
+  color:#4EACCD;
+  margin-right: 15px;
+}
