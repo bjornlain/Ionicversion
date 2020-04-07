@@ -1,0 +1,50 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-item>
+      <div (click)="goBackToSettings()"  class="rowFlex">
+        <img id="arrowLeft" src="../../assets/ArrowLeft.png">
+        <p id="back">Settings</p>
+      </div>
+      <div id="topNav">
+        <p id="title">EXPORT</p>
+      </div>
+    </ion-item>
+  </ion-header>
+  <div   class="box box1">
+    <p class="textBox">File format</p>
+    <div (click)="setFileFormat()" class="rowFlex">
+      <p class="blueText">{{fileFormat}}</p>
+      <img src="../../assets/ArrowRight.png">
+    </div>
+  </div>
+  <div *ngIf="isChoosingFormat"  class="choice">
+      <div (click)="selectFileFormat('CSV')" class="fileFormat">
+        <p class="dayText">CSV</p>
+      </div>
+    <div (click)="selectFileFormat('HTML')" class="fileFormat">
+      <p class="dayText">HTML</p>
+    </div>
+  </div>
+  <div>
+    <div  *ngIf="!isChoosingFormat" class="box box2">
+      <p class="textBox">Field separator</p>
+      <div (click)="setFieldSeparator()" class="rowFlex">
+        <p class="blueText">{{fieldSeparator}}</p>
+        <img src="../../assets/ArrowRight.png">
+      </div>
+    </div>
+    <div *ngIf="isChoosingSeparator"  class="choice">
+      <div (click)="selectFieldSeparator('COMMA')" class="fileFormat">
+        <p class="dayText">COMMA</p>
+      </div>
+      <div (click)="selectFieldSeparator('AUTOMATIC')" class="fileFormat">
+        <p class="dayText">AUTOMATIC</p>
+      </div>
+      <div (click)="selectFieldSeparator('SEMICOLON')" class="fileFormat">
+        <p class="dayText">SEMICOLON</p>
+      </div>
+    </div>
+    <p *ngIf="!isChoosingSeparator"  id="info">The character that will be used to separate fields in a csv file.<br><br>
+      Durations will be exported as hours, minutes and seconds, e.g. 08:30:00</p>
+  </div>
+</ion-content>

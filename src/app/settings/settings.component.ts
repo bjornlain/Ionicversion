@@ -18,7 +18,7 @@ export class SettingsComponent implements OnInit {
     this.router.navigate(['/tabs/information']);
   }
   goToNotifications(){
-    this.router.navigate(['/tabs/notification']);
+    this.router.navigate(['/tabs/notifications']);
   }
   goToExport(){
     this.router.navigate(['/tabs/export']);

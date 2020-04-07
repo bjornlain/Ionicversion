@@ -139,6 +139,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'export',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+                import('../export/export.module').then(m => m.ExportModule)
+          }
+        ]
+      },
+      {
         path: 'update-worklog',
         children: [
           {
