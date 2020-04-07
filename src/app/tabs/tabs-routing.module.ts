@@ -69,6 +69,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'information',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+                import('../information/information.module').then(m => m.InformationModule)
+          }
+        ]
+      },
+      {
         path: 'schedule/:day/:codingHours/:codingMinutes/:socialHours/:socialMinutes',
         children: [
           {
@@ -109,6 +119,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'notifications',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+                import('../notifications/notifications.module').then(m => m.NotificationsModule)
+          }
+        ]
+      },
+      {
         path: 'worklog-details',
         children: [
           {
@@ -140,7 +160,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/createTask',
+        redirectTo: '/tabs/information',
         pathMatch: 'full'
       }
     ]

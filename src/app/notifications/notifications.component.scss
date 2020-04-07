@@ -1,0 +1,25 @@
+#topNav{
+  position: absolute;
+  top:-5px;
+  width:100%;
+}
+#back{
+  font-size: 14px;
+  font-weight: 500;
+}
+#arrowLeft{
+  margin-right:10px;
+  width:9px;
+  height:9px;
+}
+#title{
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+}
+.rowFlex{
+  justify-content: center;
+  align-items: center ;
+  display: flex;
+  flex-direction: row;
+}
